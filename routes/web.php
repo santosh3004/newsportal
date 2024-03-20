@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.dashboard');
-});
+//Admin Routes//
+    //Protected Routes
+        Route::middleware(['auth', 'role:admin'])->group(function () {
+            Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.dashboard');
+            Route::get('/admin/logout',[AdminController::class,'AdminLogout'])->name('admin.logout');
+        });
+    //Public Routes
+    Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class)->name('admin.login');
+    Route::get('/admin/logout/page',[AdminController::class,'AdminLogoutPage'])->name('admin.logout.page');
+
