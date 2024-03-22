@@ -1,47 +1,78 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('frontend.index')
+@section('home')
+    <div class="contact-page">
+        <div class="container">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="contact-wrpp">
+                        <h4 class="contactAddess-title text-center">
+                            Login </h4>
+                        <div role="form" class="wpcf7" id="wpcf7-f437-o1" lang="en-US" dir="ltr">
+                            <div class="screen-reader-response">
+                                <p role="status" aria-live="polite" aria-atomic="true"></p>
+                                <ul></ul>
+                            </div>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div style="display: none;">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                </div>
+
+                                <div class="main_section">
+                                    <div class="row">
+
+
+
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="contact-title ">
+                                                Email *
+                                            </div>
+                                            <div class="contact-form">
+                                                <span class="wpcf7-form-control-wrap sub_title"><input type="email"
+                                                        name="email" id="email" size="40"
+                                                        class="wpcf7-form-control wpcf7-text" aria-invalid="false"
+                                                        placeholder="Email"></span>
+                                                @error('email')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="contact-title ">
+                                                Password *
+                                            </div>
+                                            <div class="contact-form">
+                                                <span class="wpcf7-form-control-wrap sub_title"><input type="password"
+                                                        name="password" id="password" size="40"
+                                                        class="wpcf7-form-control wpcf7-text" aria-invalid="false"
+                                                        placeholder="Password"></span>
+                                                        @error('password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="contact-btn">
+                                                <input type="submit" value="Login Now"
+                                                    class="wpcf7-form-control has-spinner wpcf7-submit"><span
+                                                    class="wpcf7-spinner"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection

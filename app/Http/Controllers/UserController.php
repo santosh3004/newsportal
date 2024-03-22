@@ -2,47 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
-    public function AdminDashboard()
+
+    public function UserDashboard()
     {
-        return view('admin.index');
+        $id=Auth::user()->id;
+        $user=User::find($id);
+        return view('frontend.user_dashboard',compact('user'));
     }
 
-    public function AdminLogout(Request $request)
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/admin/logout/page');
-    }
-
-    public function AdminLogin()
-    {
-        return view('admin.admin_login');
-    }
-
-    public function AdminLogoutPage()
-    {
-        return view('admin.admin_logout');
-    }
-
-    public function AdminProfile()
-    {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        return view('admin.admin_profile_view',compact('user'));
-    }
-
-    public function AdminProfileStore(Request $request)
+    public function UserProfileStore(Request $request)
     {
         $id = Auth::user()->id;
         $user = User::find($id);
@@ -55,8 +30,8 @@ class AdminController extends Controller
             $image = $request->file('photo');
             $user->photo?unlink($user->photo):null;
             $image_name = date('YmdHi').'.'.$image->getClientOriginalName();
-            $image->move(public_path('uploads/admin_images'),$image_name);
-            $user->photo = 'uploads/admin_images/'.$image_name;
+            $image->move(public_path('uploads/user_images'),$image_name);
+            $user->photo = 'uploads/user_images/'.$image_name;
         }
 
         $user->save();
@@ -67,12 +42,26 @@ class AdminController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function AdminChangePassword()
+    public function UserLogout(Request $request)
     {
-        return view('admin.admin_change_password');
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 
-    public function AdminUpdatePassword(Request $request){
+    public function UserChangePassword()
+    {
+        $id=Auth::user()->id;
+        $user=User::find($id);
+        return view('frontend.user_change_password',compact('user'));
+    }
+
+    public function UserUpdatePassword(Request $request)
+    {
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required',
@@ -99,7 +88,8 @@ class AdminController extends Controller
                 'alert-type' => 'success'
             );
             return redirect()->back()->with($notification);
-        }
     }
 
 }
+}
+

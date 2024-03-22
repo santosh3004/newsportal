@@ -22,7 +22,7 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card text-center">
                 <div class="card-body">
-                    <img src="{{empty($user->photo)?asset('upload/no_image.jpg'):asset($user->photo)}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                    <img src="{{empty($user->photo)?asset('uploads/no_image.jpg'):asset($user->photo)}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
 
                     <h4 class="mb-0">{{$user->name}}</h4>
                     <p class="text-muted">{{$user->username}}</p>
@@ -95,7 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="example-fileinput" class="form-label">Profile Image</label>
-                                            <img  id="showImage" src="{{empty($user->photo)?asset('upload/no_image.jpg'):asset($user->photo)}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                                            <img  id="showImage" src="{{empty($user->photo)?asset('uploads/no_image.jpg'):asset($user->photo)}}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                                         </div>
                                     </div>
                                 </div>

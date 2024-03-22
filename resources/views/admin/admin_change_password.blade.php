@@ -28,9 +28,8 @@
                             <form method="POST" action="{{route('admin.update.password')}}">
                                 @csrf
                                 <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i>Admin Password Change</h5>
-                               @if (session('error'))
-                                    <div class="alert alert-danger">{{session('error')}}</div>
-
+                               @if (session('alert-type'))
+                                    <div class="alert alert-{{session('alert-type')}}">{{session('message')}}</div>
                                @endif
                                 <div class="row">
                                     <div class="col-md-6">
