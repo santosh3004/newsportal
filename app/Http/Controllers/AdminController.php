@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+
+    //Admin Dashboard
     public function AdminDashboard()
     {
         return view('admin.index');
     }
 
+
+    //Admin Personal Profile Managing
     public function AdminLogout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -101,5 +105,116 @@ class AdminController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+
+
+    //Admin Manage Other Admins
+
+    public function AllAdmins()
+    {
+        $admins = User::where('role','admin')->get();
+        return view('admin.admin.all_admin',compact('admins'));
+    }
+
+    public function AddAdmin(){
+        return view('admin.admin.add_admin');
+    }
+
+    public function StoreAdmin(Request $request){
+
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+        $user->role = 'admin';
+        $user->status = 'inactive';
+        $user->save();
+
+         $notification = array(
+            'message' => 'New Admin User Created Successfully',
+            'alert-type' => 'success'
+
+        );
+        return redirect()->route('all.admins')->with($notification);
+
+    }
+
+    public function EditAdmin($id){
+
+        $adminuser = User::findOrFail($id);
+        return view('admin.admin.edit_admin',compact('adminuser'));
+
+    }
+
+
+
+public function UpdateAdmin(Request $request){
+
+        $admin_id = $request->id;
+
+        $user = User::findOrFail($admin_id);
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->role = 'admin';
+        $user->status = 'inactive';
+        $user->save();
+
+         $notification = array(
+            'message' => 'Admin User Updated Successfully',
+            'alert-type' => 'success'
+
+        );
+        return redirect()->route('all.admins')->with($notification);
+
+    }
+
+
+    public function DeleteAdmin($id){
+
+        User::findOrFail($id)->delete();
+
+         $notification = array(
+            'message' => 'Admin User Deleted Successfully',
+            'alert-type' => 'success'
+
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
+
+    public function InactiveAdminUser($id){
+
+        User::findOrFail($id)->update(['status' => 'inactive']);
+
+        $notification = array(
+            'message' => 'Admin User Inactive',
+            'alert-type' => 'success'
+
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
+
+
+     public function ActiveAdminUser($id){
+
+        User::findOrFail($id)->update(['status' => 'active']);
+
+        $notification = array(
+            'message' => 'Admin User Active',
+            'alert-type' => 'success'
+
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
+
 
 }

@@ -1,8 +1,19 @@
 @extends('admin.dashboard')
 @section('main')
 
+@php
+
+$status=Auth::user()->status;
+
+@endphp
 
         <!-- start page title -->
+        @if($status == 'active')
+    <h4>Admin Account Is <span class="text-success">Active </span> </h4>
+    @else
+<h4>Admin Account Is <span class="text-danger">InActive </span> </h4>
+<p class="text-danger"><b>Plz wait admin will check and approve your account</b></p>
+    @endif
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -190,7 +201,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        
+
                         <h4 class="header-title mb-3">Revenue History</h4>
 
                         <div class="table-responsive">

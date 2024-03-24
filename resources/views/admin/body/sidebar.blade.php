@@ -4,7 +4,11 @@
 
         <!-- User box -->
 
+        @php
 
+        $status=Auth::user()->status;
+
+        @endphp
         <!--- Sidemenu -->
         <div id="sidebar-menu">
 
@@ -21,25 +25,43 @@
                 </li>
 
                 <li class="menu-title mt-2">Menu</li>
+                @if($status == 'active')
 
                 <li>
-                    <a href="#sidebarEcommerce" data-bs-toggle="collapse">
+                    <a href="#sidebarCategory" data-bs-toggle="collapse">
                         <i class="mdi mdi-cart-outline"></i>
-                        <span> Ecommerce </span>
+                        <span> Category </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarEcommerce">
+                    <div class="collapse" id="sidebarCategory">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="ecommerce-dashboard.html">Dashboard</a>
+                                <a href="{{route('all.category')}}">All Category</a>
                             </li>
                             <li>
-                                <a href="ecommerce-products.html">Products</a>
+                                <a href="{{route('add.category')}}">Add Category</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
+                <li>
+                    <a href="#sidebarSubCategory" data-bs-toggle="collapse">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <span>Sub Category </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarSubCategory">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('all.subcategory')}}">All Sub Category</a>
+                            </li>
+                            <li>
+                                <a href="{{route('add.subcategory')}}">Add Sub Category</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="#sidebarCrm" data-bs-toggle="collapse">
                         <i class="mdi mdi-account-multiple-outline"></i>
@@ -93,58 +115,23 @@
 
 
 
-                <li class="menu-title mt-2">Custom</li>
+                <li class="menu-title mt-2">Setting</li>
 
                 <li>
-                    <a href="#sidebarAuth" data-bs-toggle="collapse">
+                    <a href="#sidebarManageUsers" data-bs-toggle="collapse">
                         <i class="mdi mdi-account-circle-outline"></i>
-                        <span> Auth Pages </span>
+                        <span>Manage Admins </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarAuth">
+                    <div class="collapse" id="sidebarManageUsers">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="auth-login.html">Log In</a>
+                                <a href="{{route('all.admins')}}">All Admins</a>
                             </li>
                             <li>
-                                <a href="auth-login-2.html">Log In 2</a>
+                                <a href="{{route('add.admin')}}">Add Admin</a>
                             </li>
-                            <li>
-                                <a href="auth-register.html">Register</a>
-                            </li>
-                            <li>
-                                <a href="auth-register-2.html">Register 2</a>
-                            </li>
-                            <li>
-                                <a href="auth-signin-signup.html">Signin - Signup</a>
-                            </li>
-                            <li>
-                                <a href="auth-signin-signup-2.html">Signin - Signup 2</a>
-                            </li>
-                            <li>
-                                <a href="auth-recoverpw.html">Recover Password</a>
-                            </li>
-                            <li>
-                                <a href="auth-recoverpw-2.html">Recover Password 2</a>
-                            </li>
-                            <li>
-                                <a href="auth-lock-screen.html">Lock Screen</a>
-                            </li>
-                            <li>
-                                <a href="auth-lock-screen-2.html">Lock Screen 2</a>
-                            </li>
-                            <li>
-                                <a href="auth-logout.html">Logout</a>
-                            </li>
-                            <li>
-                                <a href="auth-logout-2.html">Logout 2</a>
-                            </li>
-                            <li>
-                                <a href="auth-confirm-mail.html">Confirm Mail</a>
-                            </li>
-                            <li>
-                                <a href="auth-confirm-mail-2.html">Confirm Mail 2</a>
-                            </li>
+
                         </ul>
                     </div>
                 </li>
@@ -209,7 +196,7 @@
 
                 <li class="menu-title mt-2">Components</li>
 
-              
+
 
                 <li>
                     <a href="#sidebarIcons" data-bs-toggle="collapse">
@@ -292,6 +279,9 @@
                     </div>
                 </li>
 
+                @else
+
+                @endif
 
             </ul>
 
