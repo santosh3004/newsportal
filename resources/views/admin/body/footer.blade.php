@@ -98,5 +98,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
+
+     <!-- InputTags js-->
+  <script src="{{ asset('backend/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/mohithg-switchery/switchery.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/multiselect/js/jquery.multi-select.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/devbridge-autocomplete/jquery.autocomplete.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+
+  <!-- Init js-->
+  <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+<!-- InputTags js-->
 </body>
 </html>

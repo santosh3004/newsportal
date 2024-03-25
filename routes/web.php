@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -68,6 +69,7 @@ require __DIR__.'/auth.php';
                 Route::get('/edit/subcategory/{id}','EditSubCategory')->name('edit.subcategory');
                 Route::post('/update/subcategory','UpdateSubCategory')->name('update.subcategory');
                 Route::get('/delete/subcategory/{id}','DeleteSubCategory')->name('delete.subcategory');
+                Route::get('/subcategory/ajax/{category_id}','GetSubCategory');
             });
 
             //Admin Manage Users Routes
@@ -78,13 +80,22 @@ require __DIR__.'/auth.php';
                 Route::get('/edit/admin/{id}','EditAdmin')->name('edit.admin');
                 Route::post('/update/admin','UpdateAdmin')->name('update.admin');
                 Route::get('/delete/admin/{id}','DeleteAdmin')->name('delete.admin');
-
                 Route::get('/inactive/admin/user/{id}','InactiveAdminUser')->name('inactive.admin.user');
-
                 Route::get('/active/admin/user/{id}','ActiveAdminUser')->name('active.admin.user');
-
             });
 
+            //Admin Manage News Routes
+            Route::controller(NewsPostController::class)->group(function(){
+                Route::get('/all/newsposts','AllNewsPosts')->name('all.newsposts');
+                Route::get('/add/newspost','AddNewsPost')->name('add.newspost');
+                Route::post('/store/newspost','StoreNewsPost')->name('store.newspost');
+                Route::get('/edit/newspost/{id}','EditNewsPost')->name('edit.newspost');
+                Route::post('/update/newspost','UpdateNewsPost')->name('update.newspost');
+                Route::get('/delete/newspost/{id}','DeleteNewsPost')->name('delete.newspost');
+                Route::get('/deactivate/newspost/{id}','DeactivateNewsPost')->name('deactivate.newspost');
+                Route::get('/activate/newspost/{id}','ActivateNewsPost')->name('activate.newspost');
+
+            });
 
         });
     //Public Routes
