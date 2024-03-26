@@ -88,7 +88,9 @@ class NewsPostController extends Controller
         NewsPost::findOrFail($newspost_id)->update([
 
             'category_id' => $request->category_id,
-            'subcategory_id' => $request->subcategory_id,
+
+            'subcategory_id' => $request->subcategory_id
+            ,
             'user_id' => $request->user_id,
             'news_title' => $request->news_title,
             'news_title_slug' => strtolower(str_replace(' ','-',$request->news_title)),

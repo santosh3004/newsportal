@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -94,11 +95,19 @@ require __DIR__.'/auth.php';
                 Route::get('/delete/newspost/{id}','DeleteNewsPost')->name('delete.newspost');
                 Route::get('/deactivate/newspost/{id}','DeactivateNewsPost')->name('deactivate.newspost');
                 Route::get('/activate/newspost/{id}','ActivateNewsPost')->name('activate.newspost');
+            });
 
+            //Admin Manage Banners Routes
+            Route::controller(BannerController::class)->group(function(){
+                Route::get('/all/banners','AllBanners')->name('all.banners');
+                Route::post('/update/banners','UpdateBanners')->name('update.banners');
             });
 
         });
     //Public Routes
     Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class)->name('admin.login');
     Route::get('/admin/logout/page',[AdminController::class,'AdminLogoutPage'])->name('admin.logout.page');
+
+    Route::get('newsdetails/{id}/{slug}',[IndexController::class,'NewsDetails']);
+    Route::get('/news/{type}/{id}/{slug}', [IndexController::class, 'CategoryNews']);
 

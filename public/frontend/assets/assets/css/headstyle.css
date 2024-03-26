@@ -1,4 +1,6 @@
-
+news-font{
+	font-size: 16px;
+}
 
 .themesbazar_header {
 	background: #FFFFFF;
@@ -47,13 +49,13 @@
 	height: 40px;
 	width: 100%;
 	background: #F1FCFF;
-	color: #000000;	
+	color: #000000;
 	line-height: 40px;
 }
 
 .scroll5-right a {
 	font-size: 18px;
-	color: #000000;	
+	color: #000000;
 	font-weight: 400;
 	margin-right: 12px;
 	display: inline-block;
@@ -134,21 +136,21 @@
 
 .sec-one-title a {
 	color: #ffffff;
-	font-size: 20px;	
+	font-size: 20px;
 	display: inline-block;
 	transition: .5s all;
 }
 
 .secOne-title2 a {
 	color: #000000;
-	font-size: 16px;	
+	font-size: 16px;
 	display:inline-block
 
 }
 
 .secOne_smallTitle a {
 	color: #000000;
-	font-size: 16px;	
+	font-size: 16px;
 	display: inline-block;
 	transition: .5s all;
 }
@@ -224,11 +226,11 @@
 
 .secEight-title a {
 	color: #000000;
-	font-size: 17px;	
+	font-size: 17px;
 	display: inline-block;
 	transition: .5s all;
 }
-  
+
 .contact-form input[type=text], input[type=email], input[type=password], input[type=file], textarea {
     width: 100%;
     padding: 12px 9px;
@@ -270,9 +272,9 @@ a:hover {
 
 
 .sticky {
-	
+
 		position: fixed !important;
-	
+
 	width: 100%;
 
 	top: 0;
@@ -384,7 +386,7 @@ a:hover {
 }
 
 
- 
+
  .single-page-subTitle {
 	font-size: 24px;
 	color: #00315e;
@@ -400,15 +402,15 @@ a:hover {
 	margin-top: 11px;
 	line-height : auto;
 }
- 
- 
+
+
  .related-title a {
 	font-size: 20px;
 	color: #000000;
 	text-decoration: none;
     transition: .5s all;
 }
- 
+
 
 #singlePopular-tab .nav-link.active {
 	color:  #000000 !important;
@@ -490,7 +492,7 @@ a:hover {
 	text-decoration: none;
 	display : inline-block;
 	font-weight: 400;
-	
+
 }
 
 .archive-p-title a {
@@ -672,7 +674,7 @@ a:hover {
 	padding: 0 10px 0 0;
 	margin: 12px 0;
 	display: inline-block;
-	transition: .5s all;	
+	transition: .5s all;
 
 }
 .themesBazar_cat05 .catBar::before {
@@ -703,7 +705,7 @@ a:hover {
 	color: #ffffff;
 	font-size: 20px;
 	text-align : left;
-	padding: 10px 6px;	
+	padding: 10px 6px;
 	border-radius: 5px 5px 0 0;
 }
 
@@ -858,7 +860,7 @@ a:hover {
 	color: #ffffff;
 	font-size: 20px;
 	text-align : left;
-	padding: 10px 6px;	
+	padding: 10px 6px;
 	border-radius: 5px 5px 0 0;
 	margin: 0 0 10px;
 }

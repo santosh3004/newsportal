@@ -38,7 +38,7 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="inputEmail4" class="form-label">Category Name </label>
                                         <select name="category_id" class="form-select" id="example-select">
-                                            <option>Select Category </option>
+
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
                                                     {{ $category->id == $newspost->category_id ? 'selected' : '' }}>
@@ -50,12 +50,15 @@
                                     <div class="form-group col-md-6 mb-3">
                                         <label for="inputEmail4" class="form-label"> Sub Category </label>
                                         <select name="subcategory_id" class="form-select" id="example-select">
-                                            <option>Select SubCategory </option>
+                                            @if($newspost->subcategory_id == NULL)
+
+                                            @else
                                             @foreach ($subcategories as $subcategory)
                                                 <option value="{{ $subcategory->id }}"
                                                     {{ $subcategory->id == $newspost->subcategory_id ? 'selected' : '' }}>
                                                     {{ $subcategory->subcategory_name }}</option>
                                             @endforeach
+                                            @endif
 
                                         </select>
                                     </div>
