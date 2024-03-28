@@ -110,4 +110,5 @@ require __DIR__.'/auth.php';
 
     Route::get('newsdetails/{id}/{slug}',[IndexController::class,'NewsDetails']);
     Route::get('/news/{type}/{id}/{slug}', [IndexController::class, 'CategoryNews']);
+    Route::get('/change/language',[IndexController::class,'Change'])->name('change.language');
 

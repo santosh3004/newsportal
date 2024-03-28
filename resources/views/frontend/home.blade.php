@@ -39,7 +39,9 @@
                                                         </h6>
                                                         <h1 class="sec-one-title">
                                                             <a href="{{url('newsdetails/'.$news_slider->id.'/'.$news_slider->news_title_slug)}}"><a
-                                                                    href=" ">{{ $news_slider->news_title }}</a></a>
+                                                                    href=" ">{{GoogleTranslate::trans($news_slider->news_title,session()->get('locale')
+                                                                    )
+                                                                    }}</a></a>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -75,7 +77,9 @@
                                         <a href=" "><img class="lazyload"
                                                 src="{{ asset($section_three->image) }}"></a>
                                         <h5 class="secOne_smallTitle">
-                                            <a href=" ">{{$section_three->news_title}} </a>
+                                            <a href=" ">{{GoogleTranslate::trans($section_three->news_title,session()->get('locale')
+                                                )
+                                                }} </a>
                                         </h5>
                                     </div>
                                 </div>
@@ -102,7 +106,9 @@
                                                     src="{{ asset($section_nine->image) }}"></a>
                                         </div>
                                         <h4 class="secOne-title2">
-                                            <a href=" ">{{$section_nine->news_title}} </a>
+                                            <a href=" ">{{GoogleTranslate::trans($section_nine->news_title,session()->get('locale')
+                                                )
+                                                }} </a>
                                         </h4>
                                     </div>
                                     <div class="cat-meta">
@@ -173,7 +179,9 @@
                                 <div class="tab-image tab-border">
                                     <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"><img class="lazyload" src="{{ asset($news->image) }}"  ></a>
                                     <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}" class="tab-icon"><i class="la la-play"></i></a>
-                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}">{{ $news->news_title }} </a></h4>
+                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}">{{GoogleTranslate::trans($news->news_title,session()->get('locale')
+                                        )
+                                        }} </a></h4>
                                 </div>
                                 @endforeach
 
@@ -185,7 +193,9 @@
                                 <div class="tab-image tab-border">
                                     <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"><img class="lazyload" src="{{ asset($news->image) }}"  ></a>
                                     <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}" class="tab-icon"><i class="la la-play"></i></a>
-                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}">{{ $news->news_title }} </a></h4>
+                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"> {{GoogleTranslate::trans($news->news_title,session()->get('locale')
+                                        )
+                                        }}</a></h4>
                                 </div>
                                 @endforeach
                             </div>

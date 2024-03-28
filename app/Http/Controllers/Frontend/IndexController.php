@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\NewsPost;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use Illuminate\Support\Facades\App;
+
 
 class IndexController extends Controller
 {
@@ -55,5 +57,15 @@ class IndexController extends Controller
         } else {
             return view('frontend.news.category_news', compact('allcategorynews', 'latesttwonews', 'latestnews', 'popularnews'));
         }
+    }
+    public function Change(Request $request){
+
+
+        //App::setLocale($request->lang);
+
+        session()->put('locale',$request->lang);
+
+        return redirect()->back();
+
     }
 }
