@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
@@ -14,7 +15,7 @@ use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 //     return view('frontend.home');
 // });
 
-Route::get('/',[IndexController::class,'Index'])->name('home');
+Route::get('/',[IndexController::class,'Index'])->name('home')->middleware('translate');
 
 
 // Route::get('/dashboard', function () {
@@ -103,6 +104,26 @@ require __DIR__.'/auth.php';
                 Route::post('/update/banners','UpdateBanners')->name('update.banners');
             });
 
+            //Admin Manage Photos Gallery Routes
+            Route::controller(GalleryController::class)->group(function(){
+                Route::get('/all/photos','Allphotos')->name('all.photos');
+                Route::get('/add/photos','Addphotos')->name('add.photos');
+                Route::post('/store/photos','Storephotos')->name('store.photos');
+                Route::get('/edit/photo/{id}','Editphoto')->name('edit.photo');
+                Route::post('/update/photo','Updatephoto')->name('update.photo');
+                Route::get('/delete/photo/{id}','Deletephoto')->name('delete.photo');
+            });
+
+            //Admin Manage Videos Gallery Routes
+            Route::controller(GalleryController::class)->group(function(){
+                Route::get('/all/video','Allvideos')->name('all.videos');
+                Route::get('/add/video','Addvideo')->name('add.video');
+                Route::post('/store/video','Storevideo')->name('store.video');
+                Route::get('/edit/video/{id}','Editvideo')->name('edit.video');
+                Route::post('/update/video','Updatevideo')->name('update.video');
+                Route::get('/delete/video/{id}','Deletevideo')->name('delete.video');
+            });
+
         });
     //Public Routes
     Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class)->name('admin.login');
@@ -111,4 +132,6 @@ require __DIR__.'/auth.php';
     Route::get('newsdetails/{id}/{slug}',[IndexController::class,'NewsDetails']);
     Route::get('/news/{type}/{id}/{slug}', [IndexController::class, 'CategoryNews']);
     Route::get('/change/language',[IndexController::class,'Change'])->name('change.language');
+
+    Route::post('/search', [IndexController::class, 'SearchByDate'])->name('search-by-date');
 

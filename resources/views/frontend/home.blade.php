@@ -25,28 +25,26 @@
                                     <div class="owl-stage"
                                         style="transform: translate3d(-1578px, 0px, 0px); transition: all 1s ease 0s; width: 3684px;">
                                         @foreach ($news_sliders as $news_slider)
-
-
                                             <div class="owl-item" style="width: 506.25px; margin-right: 20px;">
                                                 <div class="secOne_newsContent">
                                                     <div class="sec-one-image">
-                                                        <a href="{{url('newsdetails/'.$news_slider->id.'/'.$news_slider->news_title_slug)}}"><img class="lazyload"
-                                                                src="{{ asset($news_slider->image) }}"></a>
+                                                        <a
+                                                            href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}"><img
+                                                                class="lazyload" src="{{ asset($news_slider->image) }}"></a>
                                                         <h6 class="sec-small-cat">
-                                                            <a href="{{url('newsdetails/'.$news_slider->id.'/'.$news_slider->news_title_slug)}}">
+                                                            <a
+                                                                href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}">
                                                                 {{ $news_slider->created_at->format('M d Y') }}
                                                             </a>
                                                         </h6>
                                                         <h1 class="sec-one-title">
-                                                            <a href="{{url('newsdetails/'.$news_slider->id.'/'.$news_slider->news_title_slug)}}"><a
-                                                                    href=" ">{{GoogleTranslate::trans($news_slider->news_title,session()->get('locale')
-                                                                    )
-                                                                    }}</a></a>
+                                                            <a
+                                                                href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}"><a
+                                                                    href=" ">{{ GoogleTranslate::trans($news_slider->news_title, session()->get('locale')) }}</a></a>
                                                         </h1>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         @endforeach
                                     </div>
                                 </div>
@@ -77,9 +75,8 @@
                                         <a href=" "><img class="lazyload"
                                                 src="{{ asset($section_three->image) }}"></a>
                                         <h5 class="secOne_smallTitle">
-                                            <a href=" ">{{GoogleTranslate::trans($section_three->news_title,session()->get('locale')
-                                                )
-                                                }} </a>
+                                            <a href=" ">{{ GoogleTranslate::trans($section_three->news_title, session()->get('locale')) }}
+                                            </a>
                                         </h5>
                                     </div>
                                 </div>
@@ -91,34 +88,33 @@
                     </div>
 
                     @php
-                        $section_nines=App\Models\NewsPost::where('first_section_nine',1)->where('status',1)->limit(9)->get();
+                        $section_nines = App\Models\NewsPost::where('first_section_nine', 1)
+                            ->where('status', 1)
+                            ->limit(9)
+                            ->get();
                     @endphp
                     <div class="sec-one-item2">
                         <div class="row">
-                            @foreach($section_nines as $section_nine)
-
-
-                            <div class="themesBazar-3 themesBazar-m2">
-                                <div class="sec-one-wrpp2">
-                                    <div class="secOne-news">
-                                        <div class="secOne-image2">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset($section_nine->image) }}"></a>
+                            @foreach ($section_nines as $section_nine)
+                                <div class="themesBazar-3 themesBazar-m2">
+                                    <div class="sec-one-wrpp2">
+                                        <div class="secOne-news">
+                                            <div class="secOne-image2">
+                                                <a href=" "><img class="lazyload"
+                                                        src="{{ asset($section_nine->image) }}"></a>
+                                            </div>
+                                            <h4 class="secOne-title2">
+                                                <a href=" ">{{ GoogleTranslate::trans($section_nine->news_title, session()->get('locale')) }}
+                                                </a>
+                                            </h4>
                                         </div>
-                                        <h4 class="secOne-title2">
-                                            <a href=" ">{{GoogleTranslate::trans($section_nine->news_title,session()->get('locale')
-                                                )
-                                                }} </a>
-                                        </h4>
-                                    </div>
-                                    <div class="cat-meta">
-                                        <a href=" "> <i class="lar la-newspaper"></i>
-                                            {{$section_nine->created_at->format('Y M d')}}
-                                        </a>
+                                        <div class="cat-meta">
+                                            <a href=" "> <i class="lar la-newspaper"></i>
+                                                {{ $section_nine->created_at->format('Y M d') }}
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
                             @endforeach
 
                         </div>
@@ -154,9 +150,10 @@
                     <div class="themesBazar_widget">
                         <h3 style="margin-top:5px"> OLD NEWS </h3>
                     </div>
-                    <form class="wordpress-date" action=" " method="post">
-                        <input type="date" id="wordpress" placeholder="Select Date" autocomplete="off"
-                            value="" name="m" required="" class="hasDatepicker">
+                    <form class="wordpress-date" action="{{ route('search-by-date') }}" method="post">
+                        @csrf
+                        <input type="date" id="wordpress" placeholder="Select Date" autocomplete="off" value=""
+                            name="date" required="" class="hasDatepicker">
                         <input type="submit" value="Search">
                     </form>
                     <div class="recentPopular">
@@ -175,28 +172,33 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane active show  fade" id="recent" role="tabpanel" aria-labelledby="recent">
                             <div class="news-titletab">
-                                @foreach($latestnews as $news)
-                                <div class="tab-image tab-border">
-                                    <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"><img class="lazyload" src="{{ asset($news->image) }}"  ></a>
-                                    <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}" class="tab-icon"><i class="la la-play"></i></a>
-                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}">{{GoogleTranslate::trans($news->news_title,session()->get('locale')
-                                        )
-                                        }} </a></h4>
-                                </div>
+                                @foreach ($latestnews as $news)
+                                    <div class="tab-image tab-border">
+                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                class="lazyload" src="{{ asset($news->image) }}"></a>
+                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                            class="tab-icon"><i class="la la-play"></i></a>
+                                        <h4 class="tab_hadding"><a
+                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">{{ GoogleTranslate::trans($news->news_title, session()->get('locale')) }}
+                                            </a></h4>
+                                    </div>
                                 @endforeach
 
                             </div>
                         </div>
                         <div class="tab-pane fade" id="popular" role="tabpanel" aria-labelledby="popular">
                             <div class="news-titletab">
-                                @foreach($popularnews as $news)
-                                <div class="tab-image tab-border">
-                                    <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"><img class="lazyload" src="{{ asset($news->image) }}"  ></a>
-                                    <a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}" class="tab-icon"><i class="la la-play"></i></a>
-                                    <h4 class="tab_hadding"><a href="{{ url('news/details/'.$news->id.'/'.$news->news_title_slug) }}"> {{GoogleTranslate::trans($news->news_title,session()->get('locale')
-                                        )
-                                        }}</a></h4>
-                                </div>
+                                @foreach ($popularnews as $news)
+                                    <div class="tab-image tab-border">
+                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                class="lazyload" src="{{ asset($news->image) }}"></a>
+                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                            class="tab-icon"><i class="la la-play"></i></a>
+                                        <h4 class="tab_hadding"><a
+                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">
+                                                {{ GoogleTranslate::trans($news->news_title, session()->get('locale')) }}</a>
+                                        </h4>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -1619,106 +1621,25 @@
 
                     <div class="homeGallery owl-carousel owl-loaded owl-drag">
 
-
-
-
-
-
-
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transform: translate3d(-4764px, 0px, 0px); transition: all 1s ease 0s; width: 5558px;">
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 6 </a>
-                                            </h3>
+                                @php
+                                    $photos = App\Models\Gallery::where('type','photo')->latest()->get();
+                                @endphp
+                                @foreach ($photos as $photo)
+                                    <div class="owl-item" style="width: 784px; margin-right: 10px;">
+                                        <div class="item">
+                                            <div class="photo">
+                                                <a class="themeGallery" href="{{ asset($photo->photo) }}">
+                                                    <img src="{{ asset($photo->photo) }}" alt="PHOTO"></a>
+                                                <h3 class="photoCaption">
+                                                    <a href=" ">{{ $photo->created_at->diffForHumans() }} </a>
+                                                </h3>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 6 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 5 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 4 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 3 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 2 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 784px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="photo">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                            <h3 class="photoCaption">
-                                                <a href=" ">PHOTO GALLARY 1 </a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i
@@ -1727,206 +1648,21 @@
                         <div class="owl-dots disabled"></div>
                     </div>
                     <div class="homeGallery1 owl-carousel owl-loaded owl-drag">
-
-
-
-
-
-
-
                         <div class="owl-stage-outer">
                             <div class="owl-stage"
                                 style="transition: all 1s ease 0s; width: 2515px; transform: translate3d(-463px, 0px, 0px);">
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
+                                @foreach ($photos as $photo)
+                                    <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
+                                        <div class="item">
+                                            <div class="phtot2">
+                                                <a class="themeGallery"
+                                                    href="{{ asset($photo->photo) }}">
+                                                    <img src="{{ asset($photo->photo) }}"
+                                                        alt="PHOTO"></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active center" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                    <div class="item">
-                                        <div class="phtot2">
-                                            <a class="themeGallery"
-                                                href="{{ asset('frontend/assets/images/6786.jpg') }}">
-                                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}"
-                                                    alt="PHOTO"></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="owl-nav disabled"><button type="button" role="presentation"
@@ -1948,61 +1684,25 @@
                             GALLERY </a></h2>
 
                     <div class="white-bg">
+
+
+@php
+    $videos = App\Models\Gallery::where('type','video')->latest()->get();
+@endphp
+@foreach ($videos as $video)
                         <div class="secFive-smallItem">
                             <div class="secFive-smallImg">
-                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}">
-                                <a href="https://www.youtube.com/watch?v=z3ZM1TUNoUY" class="home-video-icon popup"><i
+                                <img src="{{ asset($video->photo) }}">
+                                <a href="{{$video->video}}" class="home-video-icon popup"><i
                                         class="las la-video"></i></a>
                                 <h5 class="secFive_title2">
-                                    <a href="https://www.youtube.com/watch?v=z3ZM1TUNoUY" class="popup">
-                                        Pakistan set up Asia Cup final </a>
+                                    <a href="{{$video->video}}" class="popup">
+                                        {{$video->title}}</a>
                                 </h5>
                             </div>
                         </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}">
-                                <a href="https://www.youtube.com/watch?v=XTUg53YVaqQ" class="home-video-icon popup"><i
-                                        class="las la-video"></i></a>
-                                <h5 class="secFive_title2">
-                                    <a href="https://www.youtube.com/watch?v=XTUg53YVaqQ" class="popup">
-                                        Pakistan set up Asia Cup final</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}">
-                                <a href="https://www.youtube.com/watch?v=qr3CeJJ_mkM" class="home-video-icon popup"><i
-                                        class="las la-video"></i></a>
-                                <h5 class="secFive_title2">
-                                    <a href="https://www.youtube.com/watch?v=qr3CeJJ_mkM" class="popup">
-                                        Pakistan set up Asia Cup final </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}">
-                                <a href="https://www.youtube.com/watch?v=BU12aHPjoNo" class="home-video-icon popup"><i
-                                        class="las la-video"></i></a>
-                                <h5 class="secFive_title2">
-                                    <a href="https://www.youtube.com/watch?v=BU12aHPjoNo" class="popup">
-                                        Pakistan set up Asia Cup final </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <img src="{{ asset('frontend/assets/images/lazy.jpg') }}">
-                                <a href="https://www.youtube.com/watch?v=TH0kuBADgSI" class="home-video-icon popup"><i
-                                        class="las la-video"></i></a>
-                                <h5 class="secFive_title2">
-                                    <a href="https://www.youtube.com/watch?v=TH0kuBADgSI" class="popup">
-                                        Pakistan set up Asia Cup final </a>
-                                </h5>
-                            </div>
-                        </div>
+
+@endforeach
                     </div>
                 </div>
             </div>

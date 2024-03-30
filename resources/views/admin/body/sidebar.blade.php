@@ -91,12 +91,50 @@
                             <li>
                                 <a href="{{route('all.banners')}}">All Banners</a>
                             </li>
-                            <li>
-                                <a href="{{route('add.banner')}}">Add New Banner</a>
-                            </li>
+
                         </ul>
                     </div>
                 </li>
+
+                <li class="menu-title mt-2">Gallery</li>
+
+                <li>
+                    <a href="#sidebarManagePhotos" data-bs-toggle="collapse">
+                        <i class="mdi mdi-account-circle-outline"></i>
+                        <span>Manage Photo Gallery </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarManagePhotos">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('all.photos')}}">Photo Gallery</a>
+                            </li>
+                            <li>
+                                <a href="{{route('add.photos')}}">Add Photos</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarManageVideos" data-bs-toggle="collapse">
+                        <i class="mdi mdi-account-circle-outline"></i>
+                        <span>Manage Video Gallery </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarManageVideos">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('all.videos')}}">Video Galllery</a>
+                            </li>
+                            <li>
+                                <a href="{{route('add.video')}}">Add Video</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
 
                 <li class="menu-title mt-2">Setting</li>
 
@@ -118,6 +156,8 @@
                         </ul>
                     </div>
                 </li>
+
+
 
 
 

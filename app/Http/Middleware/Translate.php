@@ -17,9 +17,12 @@ class Translate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if (session()->has('locale')) {
-        //     App::setLocale(session()->get('locale'));
-        // }
+        if (session()->has('locale')) {
+            App::setLocale(session()->get('locale'));
+        }else{
+            App::setLocale('en');
+            session()->put('locale','en');
+        }
         return $next($request);
     }
 }

@@ -8,12 +8,15 @@ use App\Models\NewsPost;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 use Illuminate\Support\Facades\App;
+use DateTime;
 
 
 class IndexController extends Controller
 {
     public function Index()
     {
+
+
         $latestnews = NewsPost::orderBy('id', 'DESC')->limit(8)->get();
         $popularnews = NewsPost::orderBy('view_count', 'DESC')->limit(8)->get();
 
@@ -58,14 +61,29 @@ class IndexController extends Controller
             return view('frontend.news.category_news', compact('allcategorynews', 'latesttwonews', 'latestnews', 'popularnews'));
         }
     }
+
     public function Change(Request $request){
 
 
-        //App::setLocale($request->lang);
+        App::setLocale($request->lang);
 
         session()->put('locale',$request->lang);
 
         return redirect()->back();
 
     }
+
+    public function SearchByDate(Request $request){
+
+        $date = new DateTime($request->date);
+        $formatDate = $date->format('d-m-Y');
+
+        $popularnews = NewsPost::orderBy('view_count', 'DESC')->limit(8)->get();
+        $latestnews = NewsPost::orderBy('id', 'DESC')->limit(8)->get();
+        $newsposts = NewsPost::where('post_date',$formatDate)->latest()->get();
+        return view('frontend.news.search_by_date',compact('newsposts','formatDate','latestnews','popularnews'));
+
+    }
+
+
 }
