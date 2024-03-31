@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 use Illuminate\Support\Facades\App;
 use DateTime;
+use App\Models\User;
 
 
 class IndexController extends Controller
@@ -83,6 +84,25 @@ class IndexController extends Controller
         $newsposts = NewsPost::where('post_date',$formatDate)->latest()->get();
         return view('frontend.news.search_by_date',compact('newsposts','formatDate','latestnews','popularnews'));
 
+    }
+
+    public function NewsSearch(Request $request){
+
+        $request->validate(['search' => "required"]);
+        $newssearchword = $request->search;
+        $searchednews = NewsPost::where('news_title','LIKE',"%$newssearchword%")->get();
+        $latestnews = NewsPost::orderBy('id','DESC')->limit(8)->get();
+        $popularnews = NewsPost::orderBy('view_count','DESC')->limit(8)->get();
+
+        return view('frontend.news.search_news',compact('searchednews','latestnews','popularnews','newssearchword'));
+    }
+
+
+    public function ReporterNews($id){
+
+        $reporter = User::findOrFail($id);
+        $reporternews = NewsPost::where('user_id',$id)->get();
+        return view('frontend.news.reporter_news',compact('reporter','reporternews'));
     }
 
 

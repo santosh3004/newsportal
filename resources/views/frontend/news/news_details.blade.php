@@ -1,30 +1,28 @@
 @extends('frontend.index')
+@section('title'){{$news->news_title}} @endsection
 @section('home')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
 
+                <div class="single-add">
+                </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-8">
-
-                    <div class="single-add">
+                <div class="single-cat-info">
+                    <div class="single-home">
+                        <i class="la la-home"> </i><a href=" "> HOME </a>
                     </div>
+                    <div class="single-cats">
+                        <i class="la la-bars"></i> <a href=" "
+                            rel="category tag">{{ $news['category']['category_name'] }}</a>,
 
-                    <div class="single-cat-info">
-                        <div class="single-home">
-                            <i class="la la-home"> </i><a href=" "> HOME </a>
-                        </div>
-                        <div class="single-cats">
-                            <i class="la la-bars"></i> <a href=" "
-                                rel="category tag">{{ $news['category']['category_name'] }}</a>,
-
-                            @if ($news->subcategory_id == null)
-                                
-                            @else
-                                <a href=" " rel="category tag">{{ $news['subcategory']['subcategory_name'] }}</a>
-                            @endif
-                        </div>
+                        @if ($news->subcategory_id == null)
+                        @else
+                            <a href=" " rel="category tag">{{ $news['subcategory']['subcategory_name'] }}</a>
+                        @endif
                     </div>
+                </div>
 
 
                 <h1 class="single-page-title">
@@ -38,12 +36,12 @@
                     </div>
                     <div class="col-lg-11 col-md-10">
                         <div class="reportar-title">
-                            Posted By {{ $news['user']['name'] }}
+                            Posted By <a href="{{ route('reporter.news',$news->user_id) }}">{{ $news['user']['name'] }} </a>
                         </div>
                         <div class="viwe-count">
                             <ul>
                                 <li><i class="la la-clock-o"></i> Updated
-                                    {{ $news->created_at->format('l M d Y') }}
+                                    {{ $news->updated_at->format('l M d Y') }}
                                 </li>
                                 <li> / <i class="la la-eye"></i>
                                     {{ $news->view_count }}
@@ -111,83 +109,101 @@
                         </script>
                     </a>
                 </div>
+ @php
+                            $reviews = App\Models\Review::where('news_id', $news->id)
+                                ->latest()
+                                ->limit(5)
+                                ->get();
+                        @endphp
 
+
+                        @foreach ($reviews as $review)
+
+                            @if ($review->status == 0)
+
+                            @else
                 <div class="author2">
                     <div class="author-content2">
                         <h6 class="author-caption2">
                             <span> COMMENTS </span>
                         </h6>
-                        <div class="author-image2">
-                            <img alt="" src="assets/images/lazy.jpg
+
+
+                                <div class="author-image2">
+                                    <img alt="" src="{{ $review->user()->first()->photo ? asset($review->user()->first()->photo) : asset('uploads/no_image.jpg') }}
     " class="avatar avatar-96 photo"
-                                height="96" width="96" loading="lazy">
-                        </div>
-                        <div class="authorContent">
-                            <h1 class="author-name2">
-                                <a href=" "> Jack MA </a>
-                            </h1>
-                            <div class="author-details">It will take the Queen's coffin on a final journey through
-                                London and on to Windsor Castle for a second service</div>
-                        </div>
+                                        height="96" width="96" loading="lazy">
+                                </div>
+                                <div class="authorContent">
+                                    <h1 class="author-name2">
+                                        <a href=" "> {{$review->user()->first()->name}} </a>
+                                    </h1>
+                                    <p> {{ $review->created_at->diffForHumans() }} </p>
+                                    <div class="author-details">{{$review->comment}}</div>
+                                </div>
 
                     </div>
                 </div>
+                @endif
 
+                @endforeach
 
                 <hr>
 
-                <form action=" " method="post" class="wpcf7-form init" enctype="multipart/form-data"
-                    novalidate="novalidate" data-status="init">
-                    <div style="display: none;">
 
-                    </div>
-                    <div class="main_section">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="contact-title ">
-                                    Subject *
+                @guest
+
+                    <p> Please <a href="{{ route('login') }}">Login</a> to Comment</p>
+                @else
+                    <form action="{{ route('store.review') }}" method="post" class="wpcf7-form init" novalidate="novalidate"
+                        data-status="init">
+                        @csrf
+                        <div style="display: none;">
+
+                        </div>
+                        <div class="main_section">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
                                 </div>
-                                <div class="contact-form">
-                                    <span class="wpcf7-form-control-wrap sub_title"><input type="text"
-                                            name="sub_title" value="" size="40"
-                                            class="wpcf7-form-control wpcf7-text" aria-invalid="false"
-                                            placeholder="News Sub Title"></span>
+                            @elseif(session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            <input hidden name="news_id" value="{{ $news->id }}">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="contact-title">
+                                        Comments
+                                    </div>
+                                    <div class="contact-form">
+                                        <span class="wpcf7-form-control-wrap news_details">
+                                            <textarea name="comment" cols="20" rows="5"
+                                                class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" aria-required="true" aria-invalid="false"
+                                                placeholder="Comment Text"></textarea>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+
+
+
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="contact-title">
-                                    Comments *
-                                </div>
-                                <div class="contact-form">
-                                    <span class="wpcf7-form-control-wrap news_details">
-                                        <textarea name="news_details" cols="20" rows="5"
-                                            class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" aria-required="true" aria-invalid="false"
-                                            placeholder="News Details...."></textarea>
-                                    </span>
+                            <div class="col-md-12">
+                                <div class="contact-btn">
+                                    <input type="submit" value="Submit Comments"
+                                        class="wpcf7-form-control has-spinner wpcf7-submit"><span
+                                        class="wpcf7-spinner"></span>
                                 </div>
                             </div>
                         </div>
 
-
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="contact-btn">
-                                <input type="submit" value="Submit Comments"
-                                    class="wpcf7-form-control has-spinner wpcf7-submit"><span
-                                    class="wpcf7-spinner"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="wpcf7-response-output" aria-hidden="true"></div>
-                </form>
-
+                        <div class="wpcf7-response-output" aria-hidden="true"></div>
+                    </form>
+                @endguest
 
 
 
@@ -218,14 +234,15 @@
                         </div>
                     @endforeach
                 </div>
-                </div>
+            </div>
             <div class="col-lg-4 col-md-4">
                 <div class="sitebar-fixd" style="position: sticky; top: 0;">
                     <div class="siteber-add">
                         <div class="themesBazar_widget">
                             <div class="textwidget">
                                 <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                        src="{{asset('frontend/assets/images/biggapon-1.gif')}}" alt="" width="100%" height="auto">
+                                        src="{{ asset('frontend/assets/images/biggapon-1.gif') }}" alt=""
+                                        width="100%" height="auto">
                                 </p>
                             </div>
                         </div>
@@ -252,7 +269,8 @@
                                 @foreach ($latestnews as $key => $news)
                                     <div class="archive-tabWrpp archiveTab-border">
                                         <div class="archiveTab-image ">
-                                            <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                            <a
+                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                     class="lazyload" src="{{ asset($news->image) }}"></a>
                                         </div>
                                         <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
@@ -275,7 +293,8 @@
                                 @foreach ($popularnews as $key => $news)
                                     <div class="archive-tabWrpp archiveTab-border">
                                         <div class="archiveTab-image ">
-                                            <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                            <a
+                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                     class="lazyload" src="{{ asset($news->image) }}"></a>
                                         </div>
                                         <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
@@ -297,10 +316,10 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
-        </div>
-        </div>
+    </div>
+    </div>
+    </div>
 
 
     <script type="text/javascript">

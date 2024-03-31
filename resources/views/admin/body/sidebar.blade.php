@@ -135,6 +135,43 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#sidebarManageLiveTVDetails" data-bs-toggle="collapse">
+                        <i class="mdi mdi-account-circle-outline"></i>
+                        <span>Manage Live Tv  Details</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarManageLiveTVDetails">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('edit.live')}}">Edit Live TV Details</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#sidebarManageReviews" data-bs-toggle="collapse">
+                        <i class="mdi mdi-account-circle-outline"></i>
+                        <span>Manage Reviews</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarManageReviews">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('all.reviews')}}">Reviews</a>
+                            </li>
+                            <li>
+                                <a href="{{route('pending.reviews')}}">Pending Reviews</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+
 
                 <li class="menu-title mt-2">Setting</li>
 
@@ -153,6 +190,21 @@
                                 <a href="{{route('add.admin')}}">Add Admin</a>
                             </li>
 
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#seo" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Seo Details </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="seo">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('seo.details') }}">Seo Details</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

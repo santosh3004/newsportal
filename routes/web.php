@@ -5,11 +5,13 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\NewsPostController;
+use App\Http\Controllers\Backend\SeoDetailsController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Frontend\ReviewController;
 
 // Route::get('/', function () {
 //     return view('frontend.home');
@@ -114,7 +116,7 @@ require __DIR__.'/auth.php';
                 Route::get('/delete/photo/{id}','Deletephoto')->name('delete.photo');
             });
 
-            //Admin Manage Videos Gallery Routes
+            //Admin Manage Videos Gallery & Live TV Details Routes
             Route::controller(GalleryController::class)->group(function(){
                 Route::get('/all/video','Allvideos')->name('all.videos');
                 Route::get('/add/video','Addvideo')->name('add.video');
@@ -122,6 +124,26 @@ require __DIR__.'/auth.php';
                 Route::get('/edit/video/{id}','Editvideo')->name('edit.video');
                 Route::post('/update/video','Updatevideo')->name('update.video');
                 Route::get('/delete/video/{id}','Deletevideo')->name('delete.video');
+
+                //Live TV Details Routes
+                Route::get('/edit/live','Editlive')->name('edit.live');
+                Route::post('/update/live','Updatelive')->name('update.live');
+
+            });
+
+            //Admin Manage Review Routes
+            Route::controller(ReviewController::class)->group(function(){
+                Route::get('/all/reviews','AllReviews')->name('all.reviews');
+                Route::get('/pending/reviews','PendingReviews')->name('pending.reviews');
+                Route::get('/approve/review/{id}','ApproveReview')->name('approve.review');
+                Route::get('/reject/review/{id}','RejectReview')->name('reject.review');
+                Route::get('/delete/review/{id}','DeleteReview')->name('delete.review');
+            });
+
+            //Admin Manage SEO Routes
+            Route::controller(SeoDetailsController::class)->group(function(){
+                Route::post('/update/seo','UpdateSeo')->name('update.seo');
+                Route::get('/seo/details','SeoDetails')->name('seo.details');
             });
 
         });
@@ -134,4 +156,10 @@ require __DIR__.'/auth.php';
     Route::get('/change/language',[IndexController::class,'Change'])->name('change.language');
 
     Route::post('/search', [IndexController::class, 'SearchByDate'])->name('search-by-date');
+
+    Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
+
+    Route::post('/news/search', [IndexController::class, 'NewsSearch'])->name('search.news');
+
+    Route::get('reporter/news/{id}',[IndexController::class,'ReporterNews'])->name('reporter.news');
 

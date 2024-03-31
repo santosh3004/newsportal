@@ -1,4 +1,5 @@
 @extends('frontend.index')
+@section('title'){{$allcategorynews[0]->category()->first()->category_name}} @endsection
 @section('home')
     <div class="container">
         <div class="row">

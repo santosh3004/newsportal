@@ -1,4 +1,7 @@
 @extends('frontend.index')
+@section('title')
+Home
+@endsection
 @section('home')
     <div class="container">
         <div class="row">
@@ -40,7 +43,10 @@
                                                         <h1 class="sec-one-title">
                                                             <a
                                                                 href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}"><a
-                                                                    href=" ">{{ GoogleTranslate::trans($news_slider->news_title, session()->get('locale')) }}</a></a>
+                                                                    href=" ">{{
+                                                                    //GoogleTranslate::trans($news_slider->news_title, session()->get('locale'))
+                                                                    $news_slider->news_title
+                                                                    }}</a></a>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -75,7 +81,10 @@
                                         <a href=" "><img class="lazyload"
                                                 src="{{ asset($section_three->image) }}"></a>
                                         <h5 class="secOne_smallTitle">
-                                            <a href=" ">{{ GoogleTranslate::trans($section_three->news_title, session()->get('locale')) }}
+                                            <a href=" ">{{
+                                                //GoogleTranslate::trans($section_three->news_title, session()->get('locale'))
+                                                $section_three->news_title
+                                                }}
                                             </a>
                                         </h5>
                                     </div>
@@ -104,7 +113,10 @@
                                                         src="{{ asset($section_nine->image) }}"></a>
                                             </div>
                                             <h4 class="secOne-title2">
-                                                <a href=" ">{{ GoogleTranslate::trans($section_nine->news_title, session()->get('locale')) }}
+                                                <a href=" ">{{
+                                                    //GoogleTranslate::trans($section_nine->news_title, session()->get('locale'))
+                                                    $section_nine->news_title
+                                                }}
                                                 </a>
                                             </h4>
                                         </div>
@@ -126,9 +138,12 @@
                             <a href=" ">LIVE TV </a>
                             <div class="themesBazar"></div>
                         </div>
+                        @php
+                                            $live = App\Models\Gallery::findOrFail(6);
+                                        @endphp
                         <div class="popup-wrpp">
                             <div class="live_image">
-                                <img width="700" height="400" src="{{ asset('frontend/assets/images/lazy.jpg') }}"
+                                <img width="700" height="400" src="{{ $live->photo ? asset($live->photo) : asset('uploads/no_image.jpg') }}"
                                     class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
                                     loading="lazy">
                                 <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
@@ -138,9 +153,9 @@
                                 <div id="mymodal" class="mfp-hide" role="dialog" aria-labelledby="modal-titles"
                                     aria-describedby="modal-contents">
                                     <div id="modal-contents">
+
                                         <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
-                                            <iframe class="" src=" " allowfullscreen="allowfullscreen"
-                                                width="100%" height="400px"></iframe>
+                                            <iframe width="971" height="546" src="{{'https://www.youtube.com/embed/'.$live->video}}" title="{{$live->title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -174,12 +189,14 @@
                             <div class="news-titletab">
                                 @foreach ($latestnews as $news)
                                     <div class="tab-image tab-border">
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                 class="lazyload" src="{{ asset($news->image) }}"></a>
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"
                                             class="tab-icon"><i class="la la-play"></i></a>
                                         <h4 class="tab_hadding"><a
-                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">{{ GoogleTranslate::trans($news->news_title, session()->get('locale')) }}
+                                                href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}">{{ //GoogleTranslate::trans($news->news_title, session()->get('locale'))
+                                            $news->news_title
+                                            }}
                                             </a></h4>
                                     </div>
                                 @endforeach
@@ -190,13 +207,16 @@
                             <div class="news-titletab">
                                 @foreach ($popularnews as $news)
                                     <div class="tab-image tab-border">
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                 class="lazyload" src="{{ asset($news->image) }}"></a>
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"
                                             class="tab-icon"><i class="la la-play"></i></a>
                                         <h4 class="tab_hadding"><a
-                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">
-                                                {{ GoogleTranslate::trans($news->news_title, session()->get('locale')) }}</a>
+                                                href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}">
+                                                {{
+                                                //GoogleTranslate::trans($news->news_title, session()->get('locale'))
+                                                $news->news_title
+                                                }}</a>
                                         </h4>
                                     </div>
                                 @endforeach
@@ -1693,7 +1713,7 @@
                         <div class="secFive-smallItem">
                             <div class="secFive-smallImg">
                                 <img src="{{ asset($video->photo) }}">
-                                <a href="{{$video->video}}" class="home-video-icon popup"><i
+                                <a href="{{'https://www.youtube.com/embed/'.$video->video}}" class="home-video-icon popup"><i
                                         class="las la-video"></i></a>
                                 <h5 class="secFive_title2">
                                     <a href="{{$video->video}}" class="popup">

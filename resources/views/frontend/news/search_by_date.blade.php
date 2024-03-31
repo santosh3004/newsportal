@@ -1,4 +1,5 @@
 @extends('frontend.index')
+@section('title'){{'Results of News Search'}} @endsection
 @section('home')
     <div class="container">
         <div class="row">

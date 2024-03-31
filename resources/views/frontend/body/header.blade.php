@@ -23,7 +23,7 @@
 
                                 <div class="col-md-6">
 
-                                    <select class="form-select changeLang">
+                                    {{-- <select class="form-select changeLang">
                                         <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>
                                             English</option>
 
@@ -35,7 +35,7 @@
                                             <option value="ja" {{ session()->get('locale') == 'ja' ? 'selected' : '' }}>
                                                 {{GoogleTranslate::trans('Japanese','ja')}}</option>
 
-                                    </select>
+                                    </select> --}}
 
                                 </div>
 
@@ -45,10 +45,11 @@
 
                         </div>
                         <div class="col-lg-3 col-md-3">
-                            <form class="header-search" action=" " method="post">
-                                <input type="text" alue="" name="s" placeholder=" Search Here "
-                                    required="">
-                                <button type="submit" value="Search"> <i class="las la-search"></i> </button>
+                            <form class="header-search" action="{{route('search.news')}}" method="post">
+                                @csrf
+                                <input type="text" alue="" name="search" placeholder=" Search Here "
+                                   >
+                                <button type="submit"  value="Search"> <i class="las la-search"></i> </button>
                             </form>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -59,19 +60,23 @@
                                     <li><a href="https://twitter.com/" target="_blank" title="twitter"><i
                                                 class="lab la-twitter"> </i> </a></li>
                                     @auth
-                                        <li><a href="{{ route('dashboard') }}"><b>{{GoogleTranslate::trans('Profile',session()->get('locale')
+                                        {{-- <li><a href="{{ route('dashboard') }}"><b>{{GoogleTranslate::trans('Profile',session()->get('locale')
                                             )
                                             }}  </b></a> </li>
                                         <li><a href="{{ route('user.logout') }}"> <b>{{GoogleTranslate::trans('Log Out',session()->get('locale')
                                             )
-                                            }}</b> </a> </li>
+                                            }}</b> </a> </li> --}}
+                                            <li><a href="{{ route('dashboard') }}"><b>Profile</b></a> </li>
+                                            <li><a href="{{ route('user.logout') }}"> <b>Log Out</b> </a> </li>
                                     @else
-                                        <li><a href="{{ route('login') }}"><b> {{GoogleTranslate::trans('Login',session()->get('locale')
+                                        {{-- <li><a href="{{ route('login') }}"><b> {{GoogleTranslate::trans('Login',session()->get('locale')
                                             )
                                             }} </b></a> </li>
                                         <li> <a href="{{ route('register') }}"> <b>{{GoogleTranslate::trans('Register',session()->get('locale')
                                             )
-                                            }}</b> </a> </li>
+                                            }}</b> </a> </li> --}}
+                                             <li><a href="{{ route('login') }}"><b> Login </b></a> </li>
+                                            <li> <a href="{{ route('register') }}"> <b>Register</b> </a> </li>
                                     @endauth
 
                                 </ul>
@@ -120,8 +125,9 @@
                                 <li id="menu-item-89"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-89">
                                     <a href="{{ route('home') }}" aria-current="page"> <i
-                                            class="fa-solid fa-house-user"></i> {{GoogleTranslate::trans('Home',session()->get('locale')
-                                            )
+                                            class="fa-solid fa-house-user"></i> {{
+                                            //GoogleTranslate::trans('Home',session()->get('locale'))
+                                            'Home'
                                             }}</a>
                                 </li>
 
@@ -129,8 +135,10 @@
                                     <li id="menu-item-291"
                                         class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-291 has-sub">
                                         <a
-                                            href="{{ url('news/category/' . $category->id . '/' . $category->category_slug) }}">{{GoogleTranslate::trans($category->category_name,session()->get('locale')
-                                            )
+                                            href="{{ url('news/category/' . $category->id . '/' . $category->category_slug) }}">{{
+
+                                            // GoogleTranslate::trans($category->category_name,session()->get('locale'))
+                                            $category->category_name
                                             }}</a>
 
                                         @php
@@ -145,8 +153,10 @@
                                                 <li id="menu-item-294"
                                                     class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-294">
                                                     <a
-                                                        href="{{ url('news/subcategory/' . $subcategory->id . '/' . $subcategory->subcategory_slug) }}"> {{GoogleTranslate::trans($subcategory->subcategory_name,session()->get('locale')
-                                                        )
+                                                        href="{{ url('news/subcategory/' . $subcategory->id . '/' . $subcategory->subcategory_slug) }}"> {{
+
+                                                        // GoogleTranslate::trans($subcategory->subcategory_name,session()->get('locale'))
+                                                        $subcategory->subcategory_name
                                                      }}</a>
                                                 </li>
                                             @endforeach
@@ -156,8 +166,9 @@
                                 @endforeach
                                 <li id="menu-item-277"
                                     class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-277">
-                                    <a href=" ">{{GoogleTranslate::trans('International',session()->get('locale')
-                                        )
+                                    <a href=" ">{{
+                                    // GoogleTranslate::trans('International',session()->get('locale'))
+                                    'International'
                                         }}</a>
                                 </li>
 

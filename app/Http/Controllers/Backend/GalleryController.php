@@ -195,7 +195,41 @@ class GalleryController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    //Methods for Live TV Details
+    public function Editlive(){
 
+        $live = Gallery::findOrFail(6);
+        return view('admin.gallery.edit_live',compact('live'));
+
+    }
+
+    public function Updatelive(Request $request){
+
+        $live = Gallery::findOrFail(6);
+
+        if ($request->file('thumbnail')) {
+            unlink($live->photo);
+            $name_gen = hexdec(uniqid()).'.'.$request->file('thumbnail')->getClientOriginalExtension();
+            $request->file('thumbnail')->move('uploads/gallery/thumbnails/',$name_gen);
+            $save_url = 'uploads/gallery/thumbnails/'.$name_gen;
+            $live->update([
+                'photo' => $save_url,
+            ]);
+        }
+
+        $live->update([
+            'title'=> $request->title,
+            'video' => $request->video,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Video Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('edit.live')->with($notification);
+    }
 
 
 }

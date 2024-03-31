@@ -3,18 +3,23 @@
 <html lang="en-US">
 
 <head>
+    @php
+    $seo = App\Models\SeoDetails::find(1);
+     @endphp
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Home | News Portal</title>
+    <title> @yield('title') | News Portal</title>
 
     <link rel="shortcut icon" href="{{asset('frontend/assets/images/favicon.gif')}}" type="image/x-icon">
 
-
-    <meta name="keywords" content="online newspaper, bangla news, news, bangla, newsportal">
-    <meta name="description" content="Popular News Paper of Bangladesh">
+    <meta name="title" content="{{ $seo->meta_title }}">
+    <meta name="author" content="{{ $seo->meta_author }}">
+    <meta name="keywords" content="{{ $seo->meta_keyword }}">
+    <meta name="description" content="{{ $seo->meta_description }}">
 
     <link rel="stylesheet" href="{{asset('frontend/assets/css/line-awesome.min.css')}}" />
     <link rel="stylesheet" href="{{asset('frontend/assets/css/headstyle.css')}}" />
@@ -58,6 +63,8 @@
 
     <script charset="utf-8" src="{{asset('frontend/assets/js/horizon_timeline.08c300ab95020b1109a05214ccb84dea.js')}}"></script>
 </head>
+
+
 
 <body class="home blog" oncontextmenu="return true" data-new-gr-c-s-check-loaded="14.1078.0" data-gr-ext-installed="">
 
