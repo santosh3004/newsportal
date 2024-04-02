@@ -1,5 +1,7 @@
 @extends('admin.dashboard')
 @section('main')
+
+
     <div class="content">
 
         <!-- Start Content-->
@@ -11,11 +13,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.category') }}" class="btn btn-blue waves-effect waves-light">Add
-                                    Category</a>
+                                <a href="{{ route('add.permission') }}" class="btn btn-blue waves-effect waves-light">Add
+                                    Permission</a>
                             </ol>
                         </div>
-                        <h4 class="page-title">Category All </h4>
+                        <h4 class="page-title">All Permissions</h4>
                     </div>
                 </div>
             </div>
@@ -31,26 +33,27 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Category Name </th>
+                                        <th>Permission Name </th>
+                                        <th>Group Name </th>
                                         <th>Action </th>
                                     </tr>
                                 </thead>
 
 
                                 <tbody>
-                                    @foreach ($categories as $key => $category)
+                                    @foreach ($permissions as $key => $permission)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ $permission->name }}</td>
+                                            <td>{{ $permission->group_name }}</td>
                                             <td>
-                                                @if(Auth::user()->can('category.edit'))
-                                                <a href="{{ route('edit.category',$category->id) }}"
+                                                <a href="{{ route('edit.category', $permission->id) }}"
                                                     class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                                    @endif
-                                                    @if(Auth::user()->can('category.delete'))
-                                                <a id="delete" href="{{ route('delete.category',$category->id) }}"
-                                                    class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
-@endif
+
+                                                <a href="{{ route('delete.category', $permission->id) }}"
+                                                    class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                    id="delete">Delete</a>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -69,4 +72,10 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
+
 @endsection
+
+
+
+
+

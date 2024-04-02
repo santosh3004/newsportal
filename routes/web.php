@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\NewsPostController;
+use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\Backend\SeoDetailsController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
@@ -144,6 +145,32 @@ require __DIR__.'/auth.php';
             Route::controller(SeoDetailsController::class)->group(function(){
                 Route::post('/update/seo','UpdateSeo')->name('update.seo');
                 Route::get('/seo/details','SeoDetails')->name('seo.details');
+            });
+
+            //Admin Manage Roles and Permisisons Routes
+            Route::controller(RolePermissionController::class)->group(function(){
+                Route::get('/all/permissions','AllPermissions')->name('all.permissions');
+                Route::get('/add/permission','AddPermission')->name('add.permission');
+                Route::post('/store/permission','StorePermission')->name('store.permission');
+                Route::get('/edit/permission/{id}','EditPermission')->name('edit.permission');
+                Route::post('/update/permission','UpdatePermission')->name('update.permission');
+                Route::get('/delete/permission/{id}','DeletePermission')->name('delete.permission');
+
+
+                Route::get('/all/roles','AllRoles')->name('all.roles');
+                Route::get('/add/role','AddRole')->name('add.role');
+                Route::post('/store/role','StoreRole')->name('store.role');
+                Route::get('/edit/role/{id}','EditRole')->name('edit.role');
+                Route::post('/update/role','UpdateRole')->name('update.role');
+                Route::get('/delete/role/{id}','DeleteRole')->name('delete.role');
+
+                Route::get('/assign/permission','AssignPermission')->name('assign.permission');
+                Route::post('/store/assigned/permission','StoreAssignedPermission')->name('store.assignedpermission');
+                Route::get('/edit/assigned/permission/{role_id}','EditAssignedPermission')->name('edit.assignedpermission');
+                Route::post('/update/assigned/permission/{id}','UpdateAssignedPermission')->name('update.assignedpermission');
+                Route::get('/delete/assigned/permission/{role_id}','DeleteAssignedPermission')->name('delete.assignedpermission');
+                Route::get('/all/assigned/permission','AllAssignedPermissions')->name('all.assignedpermissions');
+
             });
 
         });

@@ -11,11 +11,10 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.category') }}" class="btn btn-blue waves-effect waves-light">Add
-                                    Category</a>
+
                             </ol>
                         </div>
-                        <h4 class="page-title">Category All </h4>
+                        <h4 class="page-title">All Asigned Permissions</h4>
                     </div>
                 </div>
             </div>
@@ -27,30 +26,38 @@
                         <div class="card-body">
 
 
-                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Category Name </th>
-                                        <th>Action </th>
+                                        <th>Roles Name </th>
+                                        <th>Permissions </th>
+                                        <th width="18%">Action </th>
                                     </tr>
                                 </thead>
 
 
                                 <tbody>
-                                    @foreach ($categories as $key => $category)
+                                    @foreach ($roles as $key => $item)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ $item->name }}</td>
+
                                             <td>
-                                                @if(Auth::user()->can('category.edit'))
-                                                <a href="{{ route('edit.category',$category->id) }}"
+                                                @foreach ($item->permissions as $permission)
+                                                    <span class="badge rounded-pill bg-danger">{{ $permission->name }}</span>
+                                                @endforeach
+                                            </td>
+
+
+                                            <td width="18%">
+                                                <a href="{{ route('edit.assignedpermission', $item->id) }}"
                                                     class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                                    @endif
-                                                    @if(Auth::user()->can('category.delete'))
-                                                <a id="delete" href="{{ route('delete.category',$category->id) }}"
-                                                    class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
-@endif
+
+                                                <a href="{{ route('delete.assignedpermission', $item->id) }}"
+                                                    class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                    id="delete">Delete</a>
+
                                             </td>
                                         </tr>
                                     @endforeach

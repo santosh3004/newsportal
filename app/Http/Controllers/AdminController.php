@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
@@ -117,7 +119,9 @@ class AdminController extends Controller
     }
 
     public function AddAdmin(){
-        return view('admin.admin.add_admin');
+        $roles = Role::all();
+
+        return view('admin.admin.add_admin',compact('roles'));
     }
 
     public function StoreAdmin(Request $request){
@@ -132,6 +136,9 @@ class AdminController extends Controller
         $user->status = 'inactive';
         $user->save();
 
+        if($request->role_id){
+            $user->assignRole($request->role_id);
+        }
          $notification = array(
             'message' => 'New Admin User Created Successfully',
             'alert-type' => 'success'
@@ -142,9 +149,9 @@ class AdminController extends Controller
     }
 
     public function EditAdmin($id){
-
+        $roles= Role::all();
         $adminuser = User::findOrFail($id);
-        return view('admin.admin.edit_admin',compact('adminuser'));
+        return view('admin.admin.edit_admin',compact('adminuser','roles'));
 
     }
 
@@ -160,8 +167,13 @@ public function UpdateAdmin(Request $request){
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->role = 'admin';
-        $user->status = 'inactive';
+        $user->status = 'active';
         $user->save();
+
+        $user->roles()->detach();
+        if($request->role_id){
+            $user->assignRole($request->role_id);
+        }
 
          $notification = array(
             'message' => 'Admin User Updated Successfully',
@@ -175,8 +187,10 @@ public function UpdateAdmin(Request $request){
 
     public function DeleteAdmin($id){
 
-        User::findOrFail($id)->delete();
-
+        $user=User::findOrFail($id);
+        if(!is_null($user)){
+            $user->delete();
+        }
          $notification = array(
             'message' => 'Admin User Deleted Successfully',
             'alert-type' => 'success'

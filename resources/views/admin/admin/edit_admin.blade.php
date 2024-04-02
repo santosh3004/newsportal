@@ -60,6 +60,15 @@
                                             value="{{ $adminuser->phone }}">
                                     </div>
 
+                                    <div class="form-group col-md-6 mb-3">
+                                        <label for="inputEmail4" class="form-label">Assign Roles </label>
+                                        <select name="role_id" class="form-select" id="example-select">
+
+                                            @foreach ($roles as $role)
+                                                <option {{$adminuser->hasRole($role->name)?'selected':''}} value="{{ $role->name }}">{{ $role->name }} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                 </div>
 

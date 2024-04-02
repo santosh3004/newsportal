@@ -36,6 +36,7 @@
                                         <th>Email </th>
                                         <th>Phone </th>
                                         <th>Status </th>
+                                        <th>Role </th>
                                         <th>Action </th>
                                     </tr>
                                 </thead>
@@ -56,9 +57,11 @@
                                                 @else
                                                     <span class="badge badge-pill bg-danger">InActive</span>
                                                 @endif
-
-
                                             </td>
+                                            <td>
+                                                @foreach ($item->roles as $role)
+                                                    <span class="badge badge-pill bg-primary">{{ $role->name }}</span>
+                                                @endforeach
                                             <td>
                                                 <a href="{{ route('edit.admin', $item->id) }}"
                                                     class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
