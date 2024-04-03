@@ -167,6 +167,7 @@ class RolePermissionController extends Controller
             $data['permission_id'] = $item;
 
             DB::table('role_has_permissions')->insert($data);
+            
         }
 
          $notification = array(
