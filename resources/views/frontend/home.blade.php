@@ -76,10 +76,10 @@
                             @foreach ($section_threes as $section_three)
                                 <div class="secOne-smallItem">
                                     <div class="secOne-smallImg">
-                                        <a href=" "><img class="lazyload"
+                                        <a href="{{url('newsdetails/'.$section_three->id).'/'.$section_three->news_title_slug}}"><img class="lazyload"
                                                 src="{{ asset($section_three->image) }}"></a>
                                         <h5 class="secOne_smallTitle">
-                                            <a href=" ">{{ //GoogleTranslate::trans($section_three->news_title, session()->get('locale'))
+                                            <a href="{{url('newsdetails/'.$section_three->id).'/'.$section_three->news_title_slug}}">{{ //GoogleTranslate::trans($section_three->news_title, session()->get('locale'))
                                                 $section_three->news_title }}
                                             </a>
                                         </h5>
@@ -105,17 +105,17 @@
                                     <div class="sec-one-wrpp2">
                                         <div class="secOne-news">
                                             <div class="secOne-image2">
-                                                <a href=" "><img class="lazyload"
+                                                <a href="{{url('newsdetails/'.$section_nine->id).'/'.$section_nine->news_title_slug}}"><img class="lazyload"
                                                         src="{{ asset($section_nine->image) }}"></a>
                                             </div>
                                             <h4 class="secOne-title2">
-                                                <a href=" ">{{ //GoogleTranslate::trans($section_nine->news_title, session()->get('locale'))
+                                                <a href="{{url('newsdetails/'.$section_nine->id).'/'.$section_nine->news_title_slug}}">{{ //GoogleTranslate::trans($section_nine->news_title, session()->get('locale'))
                                                     $section_nine->news_title }}
                                                 </a>
                                             </h4>
                                         </div>
                                         <div class="cat-meta">
-                                            <a href=" "> <i class="lar la-newspaper"></i>
+                                            <a href="{{url('newsdetails/'.$section_nine->id).'/'.$section_nine->news_title_slug}}"> <i class="lar la-newspaper"></i>
                                                 {{ $section_nine->created_at->format('Y M d') }}
                                             </a>
                                         </div>
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

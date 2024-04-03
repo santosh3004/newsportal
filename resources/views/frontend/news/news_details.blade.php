@@ -35,12 +35,12 @@
                     </div>
                     <div class="col-lg-11 col-md-10">
                         <div class="reportar-title">
-                            Posted By <a href="{{ route('reporter.news',$news->user_id) }}">{{ $news['user']['name'] }} </a>
+                            Posted By <a href="{{ $news->user()->first()?route('reporter.news',$news->user_id):route('home') }}">{{ $news->user()->first()?$news['user']['name']:'Author' }} </a>
                         </div>
                         <div class="viwe-count">
                             <ul>
-                                <li><i class="la la-clock-o"></i> Updated
-                                    {{ $news->updated_at->format('l M d Y') }}
+                                <li><i class="la la-clock-o"></i>
+                                    {{ $news->created_at->format('l M d Y') }}
                                 </li>
                                 <li> / <i class="la la-eye"></i>
                                     {{ $news->view_count }}
@@ -216,12 +216,12 @@
                             <div class="related-wrpp">
                                 <div class="related-image">
 
-                                    <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                    <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                             class="lazyload" src="{{ asset($news->image) }}"></a>
                                 </div>
                                 <h4 class="related-title">
 
-                                    <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}">{{ $news->news_title }}
+                                    <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}">{{ $news->news_title }}
                                     </a>
                                 </h4>
                                 <div class="related-meta">
@@ -272,10 +272,10 @@
                                     <div class="archive-tabWrpp archiveTab-border">
                                         <div class="archiveTab-image ">
                                             <a
-                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                     class="lazyload" src="{{ asset($news->image) }}"></a>
                                         </div>
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"
                                             class="archiveTab-icon2"><i class="la la-play"></i></a>
                                         <h4 class="archiveTab_hadding"><a href=" ">{{ $news->news_title }}
                                             </a>
@@ -296,10 +296,10 @@
                                     <div class="archive-tabWrpp archiveTab-border">
                                         <div class="archiveTab-image ">
                                             <a
-                                                href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
                                                     class="lazyload" src="{{ asset($news->image) }}"></a>
                                         </div>
-                                        <a href="{{ url('news/details/' . $news->id . '/' . $news->news_title_slug) }}"
+                                        <a href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"
                                             class="archiveTab-icon2"><i class="la la-play"></i></a>
                                         <h4 class="archiveTab_hadding"><a href=" ">{{ $news->news_title }}
                                             </a>
