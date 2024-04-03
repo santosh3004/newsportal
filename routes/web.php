@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -56,6 +57,11 @@ require __DIR__.'/auth.php';
             Route::post('/admin/update/password',[AdminController::class,'AdminUpdatePassword'])->name('admin.update.password');
 
 
+            //Admin Manage Site Settings Routes
+            Route::controller(SiteSettingController::class)->group(function(){
+                Route::get('/site/settings','SiteSettings')->name('site.settings');
+                Route::post('/update/site/settings','UpdateSiteSettings')->name('update.site.settings');
+            });
             //Admin Manage Category Routes
             Route::controller(CategoryController::class)->group(function(){
                 Route::get('/all/category','AllCategory')->name('all.category');
@@ -139,6 +145,10 @@ require __DIR__.'/auth.php';
                 Route::get('/approve/review/{id}','ApproveReview')->name('approve.review');
                 Route::get('/reject/review/{id}','RejectReview')->name('reject.review');
                 Route::get('/delete/review/{id}','DeleteReview')->name('delete.review');
+
+                //Admin Manage Notification Status
+                Route::get('change/notification/status/{id}','ChangeNotificationStatus')->name('change.notification.status');
+
             });
 
             //Admin Manage SEO Routes
@@ -170,8 +180,12 @@ require __DIR__.'/auth.php';
                 Route::post('/update/assigned/permission/{id}','UpdateAssignedPermission')->name('update.assignedpermission');
                 Route::get('/delete/assigned/permission/{role_id}','DeleteAssignedPermission')->name('delete.assignedpermission');
                 Route::get('/all/assigned/permission','AllAssignedPermissions')->name('all.assignedpermissions');
-
             });
+
+
+
+
+
 
         });
     //Public Routes

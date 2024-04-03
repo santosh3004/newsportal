@@ -144,7 +144,7 @@
                                             </td>
                                             <td>{{ Str::limit($news->news_title, 20) }}</td>
                                             <td>{{ $news->category()->first()->category_name }}</td>
-                                            <td>{{ $news->user()->first()->name }}</td>
+                                            <td>{{ $news->user()->first()?$news->user()->first()->name:'Author' }}</td>
                                             <td>{{ Carbon\Carbon::parse($news->post_date)->diffForHumans() }}</td>
                                             <td>
                                                 @if ($news->status == 1)

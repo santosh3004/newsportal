@@ -2,57 +2,24 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
 
-            <li class="d-none d-lg-block">
-                <form class="app-search">
-                    <div class="app-search-box dropdown">
-                        <div class="input-group">
-                            <input type="search" class="form-control" placeholder="Search..." id="top-search">
-                            <button class="btn input-group-text" type="submit">
-                                <i class="fe-search"></i>
-                            </button>
-                        </div>
-                        <div class="dropdown-menu dropdown-lg" id="search-dropdown">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">Found 22 results</h5>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-home me-1"></i>
-                                <span>Analytics Report</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-aperture me-1"></i>
-                                <span>How can I help you?</span>
-                            </a>
-
-
-
-
-                        </div>
-                    </div>
-                </form>
-            </li>
-
-
-
             <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen"
+                    href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
             </li>
 
 
 
-
+            @php
+                $reviewcount = Auth::user()->unreadNotifications()->count();
+            @endphp
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
+                    role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
-                    <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                    <span class="badge bg-danger rounded-circle noti-icon-badge">{{ $reviewcount }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
@@ -69,53 +36,40 @@
 
                     <div class="noti-scroll" data-simplebar>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                            <div class="notify-icon">
-                                <img src="{{asset('backend/assets/images/users/user-1.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                            <p class="notify-details">Cristina Pride</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Hi, How are you? What about our next meeting</small>
-                            </p>
-                        </a>
+                        @php
+                            $user = Auth::user();
+                        @endphp
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-primary">
-                                <i class="mdi mdi-comment-account-outline"></i>
-                            </div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin
-                                <small class="text-muted">1 min ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon">
-                                <img src="{{asset('backend/assets/images/users/user-4.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                            <p class="notify-details">Karen Robinson</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Wow ! this admin looks good and awesome design</small>
-                            </p>
-                        </a>
-
-
+                        @forelse($user->notifications as $notification)
+                            <!-- item-->
+                            <a href="{{ route('change.notification.status',$notification->id) }}" class="dropdown-item notify-item active">
+                                <div class="notify-icon">
+                                    <img src="{{ $user->image ? asset($user->image) : asset('uploads/no_image.jpg') }}"
+                                        class="img-fluid rounded-circle" alt="User Image" />
+                                </div>
+                                <p class="notify-details">{{ $notification->data['message'] }}</p>
+                                <p class="text-muted mb-0 user-msg">
+                                    <small>Admin</small>
+                                    <small>{{ $notification->created_at->diffForHumans() }}</small>
+                                </p>
+                            </a>
+                        @empty
+                        @endforelse
                     </div>
 
                     <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                        View all
-                        <i class="fe-arrow-right"></i>
-                    </a>
+
 
                 </div>
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{empty($user->photo)?asset('upload/no_image.jpg'):asset($user->photo)}}" alt="user-image" class="rounded-circle">
+                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="{{ empty(Auth::user()->photo) ? asset('uploads/no_image.jpg') : asset(Auth::user()->photo) }}"
+                        alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ms-1">
-                        Geneva <i class="mdi mdi-chevron-down"></i>
+                        {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -125,19 +79,13 @@
                     </div>
 
                     <!-- item-->
-                    <a href="{{route('admin.profile')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{ route('admin.profile') }}" class="dropdown-item notify-item">
                         <i class="fe-settings"></i>
                         <span>Settings</span>
                     </a>
 
                     <!-- item-->
-                    <a href="{{route('admin.change.password')}}" class="dropdown-item notify-item">
+                    <a href="{{ route('admin.change.password') }}" class="dropdown-item notify-item">
                         <i class="fe-lock"></i>
                         <span>Change Password</span>
                     </a>
@@ -145,7 +93,7 @@
                     <div class="dropdown-divider"></div>
 
                     <!-- item-->
-                    <a href="{{route('admin.logout')}}" class="dropdown-item notify-item">
+                    <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
                         <i class="fe-log-out"></i>
                         <span>Logout</span>
                     </a>
@@ -156,25 +104,28 @@
 
         </ul>
 
+        @php
+            $siteinfo = App\Models\SiteSetting::find(1);
+        @endphp
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="index.html" class="logo logo-dark text-center">
+            <a href="{{ route('admin.dashboard') }}" class="logo logo-dark text-center">
                 <span class="logo-sm">
-                    <img src="{{asset('backend/assets/images/logo-sm.png')}}" alt="" height="22">
-                    <!-- <span class="logo-lg-text-light">UBold</span> -->
+                    <img src="{{ asset($siteinfo->logo) }}" alt="" height="25">
+
                 </span>
                 <span class="logo-lg">
-                    <img src="{{asset('backend/assets/images/logo-dark.png')}}" alt="" height="20">
-                    <!-- <span class="logo-lg-text-light">U</span> -->
+                    <img src="{{ asset($siteinfo->logo) }}" alt="" height="25">
+
                 </span>
             </a>
 
-            <a href="index.html" class="logo logo-light text-center">
+            <a href="{{ route('admin.dashboard') }}" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src="{{asset('backend/assets/images/logo-sm.png')}}" alt="" height="22">
+                    <img src="{{ asset($siteinfo->logo) }}" alt="" height="25">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{asset('backend/assets/images/logo-light.png')}}" alt="" height="20">
+                    <img src="{{ asset($siteinfo->logo) }}" alt="" height="25">
                 </span>
             </a>
         </div>

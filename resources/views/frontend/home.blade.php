@@ -1,6 +1,6 @@
 @extends('frontend.index')
 @section('title')
-Home
+    Home
 @endsection
 @section('home')
     <div class="container">
@@ -43,10 +43,8 @@ Home
                                                         <h1 class="sec-one-title">
                                                             <a
                                                                 href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}"><a
-                                                                    href=" ">{{
-                                                                    //GoogleTranslate::trans($news_slider->news_title, session()->get('locale'))
-                                                                    $news_slider->news_title
-                                                                    }}</a></a>
+                                                                    href="{{ url('newsdetails/' . $news_slider->id . '/' . $news_slider->news_title_slug) }}">{{ //GoogleTranslate::trans($news_slider->news_title, session()->get('locale'))
+                                                                        $news_slider->news_title }}</a></a>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -81,10 +79,8 @@ Home
                                         <a href=" "><img class="lazyload"
                                                 src="{{ asset($section_three->image) }}"></a>
                                         <h5 class="secOne_smallTitle">
-                                            <a href=" ">{{
-                                                //GoogleTranslate::trans($section_three->news_title, session()->get('locale'))
-                                                $section_three->news_title
-                                                }}
+                                            <a href=" ">{{ //GoogleTranslate::trans($section_three->news_title, session()->get('locale'))
+                                                $section_three->news_title }}
                                             </a>
                                         </h5>
                                     </div>
@@ -113,10 +109,8 @@ Home
                                                         src="{{ asset($section_nine->image) }}"></a>
                                             </div>
                                             <h4 class="secOne-title2">
-                                                <a href=" ">{{
-                                                    //GoogleTranslate::trans($section_nine->news_title, session()->get('locale'))
-                                                    $section_nine->news_title
-                                                }}
+                                                <a href=" ">{{ //GoogleTranslate::trans($section_nine->news_title, session()->get('locale'))
+                                                    $section_nine->news_title }}
                                                 </a>
                                             </h4>
                                         </div>
@@ -139,11 +133,12 @@ Home
                             <div class="themesBazar"></div>
                         </div>
                         @php
-                                            $live = App\Models\Gallery::findOrFail(6);
-                                        @endphp
+                            $live = App\Models\Gallery::findOrFail(6);
+                        @endphp
                         <div class="popup-wrpp">
                             <div class="live_image">
-                                <img width="700" height="400" src="{{ $live->photo ? asset($live->photo) : asset('uploads/no_image.jpg') }}"
+                                <img width="700" height="400"
+                                    src="{{ $live->photo ? asset($live->photo) : asset('uploads/no_image.jpg') }}"
                                     class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
                                     loading="lazy">
                                 <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
@@ -155,7 +150,11 @@ Home
                                     <div id="modal-contents">
 
                                         <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
-                                            <iframe width="971" height="546" src="{{'https://www.youtube.com/embed/'.$live->video}}" title="{{$live->title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                            <iframe width="971" height="546"
+                                                src="{{ 'https://www.youtube.com/embed/' . $live->video }}"
+                                                title="{{ $live->title }}" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -195,8 +194,7 @@ Home
                                             class="tab-icon"><i class="la la-play"></i></a>
                                         <h4 class="tab_hadding"><a
                                                 href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}">{{ //GoogleTranslate::trans($news->news_title, session()->get('locale'))
-                                            $news->news_title
-                                            }}
+                                                    $news->news_title }}
                                             </a></h4>
                                     </div>
                                 @endforeach
@@ -213,37 +211,15 @@ Home
                                             class="tab-icon"><i class="la la-play"></i></a>
                                         <h4 class="tab_hadding"><a
                                                 href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}">
-                                                {{
-                                                //GoogleTranslate::trans($news->news_title, session()->get('locale'))
-                                                $news->news_title
-                                                }}</a>
+                                                {{ //GoogleTranslate::trans($news->news_title, session()->get('locale'))
+                                                    $news->news_title }}</a>
                                         </h4>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     </div>
-                    <div class="themesBazar_widget">
-                        <h3 style="margin-top:5px"> Our Like Page </h3>
-                    </div>
-                    <div class="facebook-content">
-                        <iframe src=" " width="260" height="170" style="border:none;overflow:hidden"
-                            scrolling="no" frameborder="0" allowfullscreen="true"
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                    </div>
-                    <div class="themesBazar_widget">
-                        <h3 style="margin-top:5px"> Our Like Page </h3>
-                    </div>
-                    <div class="facebook-content">
-                        <div class="twitter-timeline twitter-timeline-rendered"
-                            style="display: flex; width: 410px; max-width: 100%; margin-top: 0px; margin-bottom: 0px;">
-                            <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true"
-                                allowfullscreen="true" class=""
-                                style="position: static; visibility: visible; width: 279px; height: 220px; display: block; flex-grow: 1;"
-                                title="Twitter Timeline" src=" "></iframe>
-                        </div>
-                        <script async="" src="{{ asset('frontend/assets/js/widgets.js') }}" charset="utf-8"></script>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -272,6 +248,10 @@ Home
         </div>
     </div>
 
+    @php
+        $allnews = App\Models\NewsPost::where('status', 1)->orderBy('id', 'ASC')->limit(8)->get();
+        $categories = App\Models\Category::orderBy('category_name', 'ASC')->get();
+    @endphp
     <section class="section-two">
         <div class="container">
             <div class="secTwo-color">
@@ -280,403 +260,74 @@ Home
                         <div class="themesBazar_cat6">
                             <ul class="nav nav-pills" id="categori-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <div class="nav-link active" id="categori-tab1" data-bs-toggle="pill"
-                                        data-bs-target="#Info-tabs1" role="tab" aria-controls="Info-tabs1"
+                                    <div class="nav-link active" id="allnewstablink" data-bs-toggle="pill"
+                                        data-bs-target="#allnewstab" role="tab" aria-controls="allnewstab"
                                         aria-selected="true">
                                         ALL
                                     </div>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <div class="nav-link" id="categori-tab2" data-bs-toggle="pill"
-                                        data-bs-target="#Info-tabs2" role="tab" aria-controls="Info-tabs2"
-                                        aria-selected="false">
-                                        NATIONAL </div>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <div class="nav-link" id="categori-tab3" data-bs-toggle="pill"
-                                        data-bs-target="#Info-tabs3" role="tab" aria-controls="Info-tabs3"
-                                        aria-selected="false">
-                                        POLITICS
-                                    </div>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <div class="nav-link" id="categori-tab4" data-bs-toggle="pill"
-                                        data-bs-target="#Info-tabs4" role="tab" aria-controls="Info-tabs4"
-                                        aria-selected="false">
-                                        SPORTS </div>
-                                </li>
-                                <span class="themeBazar6"></span>
+                                @foreach ($categories as $key => $category)
+                                    <li class="nav-item" role="presentation">
+                                        <div class="nav-link" id="category-tab{{ $category->id }}"
+                                            data-bs-toggle="pill" data-bs-target="#category{{ $category->id }}"
+                                            role="tab" aria-controls="Info-tabs{{ $category->id }}"
+                                            >
+                                            {{ $category->category_name }}
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                    <span class="themeBazar6"></span>
                             </ul>
                         </div>
 
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="Info-tabs1" role="tabpanel"
-                                aria-labelledby="categori-tab1 ">
+                            <div class="tab-pane fade active show" id="allnewstab" role="tabpanel"
+                                aria-labelledby="allnewstab ">
                                 <div class="row">
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
+                                    @foreach ($allnews as $news)
+                                        <div class="themesBazar-4 themesBazar-m2">
+                                            <div class="sec-two-wrpp">
+                                                <div class="section-two-image">
 
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
+                                                    <a
+                                                        href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                            class="lazyload" src="{{ asset($news->image) }}"></a>
+                                                </div>
+                                                <h5 class="sec-two-title">
+                                                    <a href=" ">{{ $news->news_title }} </a>
+                                                </h5>
                                             </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
                                         </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a> <a
-                                                    href=" " class="mediam-icon"><i class="la la-play"></i></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a> <a
-                                                    href=" " class="mediam-icon"><i class="la la-play"></i></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="Info-tabs2" role="tabpanel" aria-labelledby="categori-tab2">
-                                <div class="row">
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
-                                    </div>
+                            @foreach ($categories as $category)
+                                <div class="tab-pane fade" id="category{{$category->id}}" role="tabpanel"
+                                    aria-labelledby="category-tab{{$category->id}} ">
+                                    <div class="row">
+                                        @php
+                                            $catwiseNews = App\Models\NewsPost::where('category_id', $category->id)
+                                                ->orderBy('id', 'DESC')
+                                                ->get();
+                                        @endphp
+                                        @foreach ($catwiseNews as $news)
+                                            <div class="themesBazar-4 themesBazar-m2">
+                                                <div class="sec-two-wrpp">
+                                                    <div class="section-two-image">
 
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
+                                                        <a
+                                                            href="{{ url('newsdetails/' . $news->id . '/' . $news->news_title_slug) }}"><img
+                                                                class="lazyload" src="{{ asset($news->image) }}"></a>
+                                                    </div>
+                                                    <h5 class="sec-two-title">
+                                                        <a href=" ">{{ $news->news_title }} </a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">Coaching centers to stay closed during SSC
-                                                    exams </a>
-                                            </h5>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="Info-tabs3" role="tabpanel" aria-labelledby="categori-tab3">
-                                <div class="row">
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="Info-tabs4" role="tabpanel" aria-labelledby="categori-tab4">
-                                <div class="row">
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a> <a
-                                                    href=" " class="mediam-icon"><i class="la la-play"></i></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a> <a
-                                                    href=" " class="mediam-icon"><i class="la la-play"></i></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <div class="themesBazar-4 themesBazar-m2">
-                                        <div class="sec-two-wrpp">
-                                            <div class="section-two-image">
-                                                <a href=" "><img class="lazyload"
-                                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            </div>
-                                            <h5 class="sec-two-title">
-                                                <a href=" ">NU Master's admission begins on Monday </a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -706,928 +357,6 @@ Home
             </div>
         </div>
     </div>
-
-    <section class="section-three">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-8">
-
-                    <h2 class="themesBazar_cat07"> <a href=" "> <i class="las la-align-justify"></i>
-                            NATIONAL </a> </h2>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="secThree-bg">
-                                <div class="sec-theee-image">
-                                    <a href=" "><img class="lazyload"
-                                            src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                </div>
-                                <h4 class="secThree-title">
-                                    <a href=" ">College tops the best list again </a>
-                                </h4>
-                            </div>
-                            <div class="row">
-                                <div class="themesBazar-2 themesBazar-m2">
-                                    <div class="secThree-wrpp">
-                                        <div class="sec-theee-image2">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        </div>
-                                        <h4 class="secThree-title2">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="themesBazar-2 themesBazar-m2">
-                                    <div class="secThree-wrpp">
-                                        <div class="sec-theee-image2">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        </div>
-                                        <h4 class="secThree-title2">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="bg2">
-                                <div class="secThree-smallItem">
-                                    <div class="secThree-smallImg">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <a href=" " class="small-icon3"><i class="la la-play"></i></a>
-                                        <h5 class="secOne_smallTitle">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="secThree-smallItem">
-                                    <div class="secThree-smallImg">
-                                        <a href="  "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secOne_smallTitle">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="secThree-smallItem">
-                                    <div class="secThree-smallImg">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secOne_smallTitle">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="secThree-smallItem">
-                                    <div class="secThree-smallImg">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secOne_smallTitle">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="secThree-smallItem">
-                                    <div class="secThree-smallImg">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secOne_smallTitle">
-                                            <a href=" ">College tops the best list again </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat07"> <a href=" "> <i class="las la-map-marker"></i>POLITICS </a>
-                    </h2>
-
-                    <div class="map-area" style="width:100%; background: #eff3f4;">
-                        <div style="padding:5px 35px 0px 35px;">
-                            <img class="lazyload" src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <br> <br>
-                            <img class="lazyload" src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_one) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_two) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_three) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="section-four">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-
-                    <h2 class="themesBazar_cat04"> <a href=" "> <i class="las la-align-justify"></i>
-                            POLITICS </a> </h2>
-
-                    <div class="secFour-slider owl-carousel owl-loaded owl-drag">
-
-
-
-
-
-
-
-
-                        <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(-3294px, 0px, 0px); transition: all 1s ease 0s; width: 4792px;">
-                                <div class="owl-item cloned" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item active" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 289.5px; margin-right: 10px;">
-                                    <div class="secFour-wrpp ">
-                                        <div class="secFour-image">
-                                            <a href=" "><img class="lazyload"
-                                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                            <h5 class="secFour-title">
-                                                <a href=" ">How Bollywood movies recover money when</a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i
-                                    class="las la-angle-left"></i></button><button type="button" role="presentation"
-                                class="owl-next"><i class="las la-angle-right"></i></button></div>
-                        <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button
-                                role="button" class="owl-dot active"><span></span></button></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_one) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_two) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="section-five">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> BIZ-ECON </a> <span> <a href=" "> More <i
-                                    class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Recovering money from selling rights</a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Recovering money from selling rights</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Recovering money from selling rights</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> INTERNATIONAL </a> <span> <a href=" ">More
-                                <i class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">How important are box office numbers</a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">How important are box office numbers</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">How important are box office numbers</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> SPORTS </a> <span> <a href=" "> More <i
-                                    class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Britney Spears says "I don't believe in God anymore" </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Britney Spears says "I don't believe in God anymore"
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Britney Spears says "I don't believe in God anymore"
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_three) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_four) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <section class="section-five">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> EDUCATION </a> <span> <a href=" "> More <i
-                                    class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> SCI-TECH </a> <span> <a href=" "> More <i
-                                    class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Nora Fatehi questioned in Rs 200cr extortion case </a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat01"> <a href=" "> SCI-TECH </a> <span> <a href=" ">More <i
-                                    class="las la-arrow-circle-right"></i> </a></span>
-                    </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Gazi Mazharul Anwar buried in mother's grave </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Gazi Mazharul Anwar buried in mother's grave </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Gazi Mazharul Anwar buried in mother's grave </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Gazi Mazharul Anwar buried in mother's grave </a>
-                                </h5>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_one) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_two) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="section-seven">
-        <div class="container">
-
-            <h2 class="themesBazar_cat01"> <a href=" "> SPORTS </a> <span> <a href=" "> More
-                        <i class="las la-arrow-circle-right"></i> </a></span> </h2>
-
-            <div class="secSecven-color">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <div class="black-bg">
-                            <div class="secSeven-image">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <a href=" " class="video-icon6"><i class="la la-play"></i></a>
-                            </div>
-                            <h6 class="secSeven-title">
-                                <a href=" ">Sachin backs Arshdeep after crucial dropped catch </a>
-                            </h6>
-                            <div class="secSeven-details">
-                                If filmmakers recover their money from selling OTT, satellite and music rights,
-                                how much do ticket sales matter? According to Johar, ticket sales is of utmost<a
-                                    href=" "> More..</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="row">
-                            <div class="themesBazar-2 themesBazar-m2">
-                                <div class="secSeven-wrpp ">
-                                    <div class="secSeven-image2">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secSeven-title2">
-                                            <a href=" ">How Neymar, Mbappe & Messi are finally thriving
-                                                at PSG </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="themesBazar-2 themesBazar-m2">
-                                <div class="secSeven-wrpp ">
-                                    <div class="secSeven-image2">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secSeven-title2">
-                                            <a href=" ">How Neymar, Mbappe & Messi are finally thriving
-                                                at PSG </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="themesBazar-2 themesBazar-m2">
-                                <div class="secSeven-wrpp ">
-                                    <div class="secSeven-image2">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secSeven-title2">
-                                            <a href=" ">How Neymar, Mbappe & Messi are finally thriving
-                                                at PSG </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="themesBazar-2 themesBazar-m2">
-                                <div class="secSeven-wrpp ">
-                                    <div class="secSeven-image2">
-                                        <a href=" "><img class="lazyload"
-                                                src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                        <h5 class="secSeven-title2">
-                                            <a href=" ">How Neymar, Mbappe & Messi are finally thriving
-                                                at PSG </a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_three) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="themesBazar_widget">
-                    <div class="textwidget">
-                        <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                src="{{ asset($banners->home_four) }}" alt="Advertisement Banner" width="100%"
-                                height="auto"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="section-five">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat04"> <a href=" "> <i class="las la-align-justify"></i>
-                            ENTERTAINMENT </a> </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Dowry case: Cricketer Al-Amin gets anticipatory bail</a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Dowry case: Cricketer Al-Amin gets anticipatory bail</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Dowry case: Cricketer Al-Amin gets anticipatory bail</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Dowry case: Cricketer Al-Amin gets anticipatory bail</a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat04"> <a href=" "> <i class="las la-align-justify"></i>
-                            FEATURE </a> </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Liverpool thrashed by Napoli in Champions League </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Liverpool thrashed by Napoli in Champions League </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Liverpool thrashed by Napoli in Champions League </a>
-                                </h5>
-                            </div>
-                        </div>
-
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Liverpool thrashed by Napoli in Champions League </a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-
-                    <h2 class="themesBazar_cat04"> <a href=" "> <i class="las la-align-justify"></i>
-                            FACEBOOK NEWS </a> </h2>
-
-                    <div class="white-bg">
-                        <div class="secFive-image">
-                            <a href=" "><img class="lazyload"
-                                    src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                            <div class="secFive-title">
-                                <a href=" ">Lewandowski hits Barca hit-trick before Bayern return </a>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Lewandowski hits Barca hit-trick before Bayern return
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Lewandowski hits Barca hit-trick before Bayern return
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <a href=" "><img class="lazyload"
-                                        src="{{ asset('frontend/assets/images/lazy.jpg') }}"></a>
-                                <h5 class="secFive_title2">
-                                    <a href=" ">Lewandowski hits Barca hit-trick before Bayern return
-                                    </a>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
 
 
 
@@ -1645,7 +374,7 @@ Home
                             <div class="owl-stage"
                                 style="transform: translate3d(-4764px, 0px, 0px); transition: all 1s ease 0s; width: 5558px;">
                                 @php
-                                    $photos = App\Models\Gallery::where('type','photo')->latest()->get();
+                                    $photos = App\Models\Gallery::where('type', 'photo')->latest()->get();
                                 @endphp
                                 @foreach ($photos as $photo)
                                     <div class="owl-item" style="width: 784px; margin-right: 10px;">
@@ -1675,10 +404,8 @@ Home
                                     <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
                                         <div class="item">
                                             <div class="phtot2">
-                                                <a class="themeGallery"
-                                                    href="{{ asset($photo->photo) }}">
-                                                    <img src="{{ asset($photo->photo) }}"
-                                                        alt="PHOTO"></a>
+                                                <a class="themeGallery" href="{{ asset($photo->photo) }}">
+                                                    <img src="{{ asset($photo->photo) }}" alt="PHOTO"></a>
                                             </div>
                                         </div>
                                     </div>
@@ -1706,23 +433,23 @@ Home
                     <div class="white-bg">
 
 
-@php
-    $videos = App\Models\Gallery::where('type','video')->latest()->get();
-@endphp
-@foreach ($videos as $video)
-                        <div class="secFive-smallItem">
-                            <div class="secFive-smallImg">
-                                <img src="{{ asset($video->photo) }}">
-                                <a href="{{'https://www.youtube.com/embed/'.$video->video}}" class="home-video-icon popup"><i
-                                        class="las la-video"></i></a>
-                                <h5 class="secFive_title2">
-                                    <a href="{{$video->video}}" class="popup">
-                                        {{$video->title}}</a>
-                                </h5>
+                        @php
+                            $videos = App\Models\Gallery::where('type', 'video')->latest()->get();
+                        @endphp
+                        @foreach ($videos as $video)
+                            <div class="secFive-smallItem">
+                                <div class="secFive-smallImg">
+                                    <img src="{{ asset($video->photo) }}">
+                                    <a href="{{ 'https://www.youtube.com/embed/' . $video->video }}"
+                                        class="home-video-icon popup"><i class="las la-video"></i></a>
+                                    <h5 class="secFive_title2">
+                                        <a href="{{ $video->video }}" class="popup">
+                                            {{ $video->title }}</a>
+                                    </h5>
+                                </div>
                             </div>
-                        </div>
 
-@endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>

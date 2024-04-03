@@ -5,6 +5,7 @@
 <head>
     @php
     $seo = App\Models\SeoDetails::find(1);
+    $siteinfo = App\Models\SiteSetting::find(1);
      @endphp
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,9 +13,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> @yield('title') | News Portal</title>
+    <title> @yield('title') | {{$siteinfo->site_title}}</title>
 
-    <link rel="shortcut icon" href="{{asset('frontend/assets/images/favicon.gif')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset($siteinfo->logo)}}" type="image/x-icon">
 
     <meta name="title" content="{{ $seo->meta_title }}">
     <meta name="author" content="{{ $seo->meta_author }}">

@@ -11,11 +11,10 @@
 
                 <div class="single-cat-info">
                     <div class="single-home">
-                        <i class="la la-home"> </i><a href=" "> HOME </a>
+                        <i class="la la-home"> </i><a href="{{route('home')}}"> HOME </a>
                     </div>
                     <div class="single-cats">
-                        <i class="la la-bars"></i> <a href=" "
-                            rel="category tag">{{ $news['category']['category_name'] }}</a>,
+                        <i class="la la-bars"></i> <a href="{{url('news/category/'.$news['category']['id'].'/'.$news['category']['category_slug'])}}" rel="category tag">{{ $news['category']['category_name'] }}</a>,
 
                         @if ($news->subcategory_id == null)
                         @else
@@ -241,7 +240,10 @@
                         <div class="themesBazar_widget">
                             <div class="textwidget">
                                 <p><img loading="lazy" class="aligncenter size-full wp-image-74"
-                                        src="{{ asset('frontend/assets/images/biggapon-1.gif') }}" alt=""
+                                    @php
+                                        $banners=App\Models\Banner::where('id',1)->first();
+                                    @endphp
+                                        src="{{ asset($banners->news_details_one) }}" alt="Advertisement Here"
                                         width="100%" height="auto">
                                 </p>
                             </div>

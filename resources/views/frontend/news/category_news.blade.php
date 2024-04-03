@@ -49,6 +49,7 @@
 
 
                     <div class="col-md-4 col-sm-4">
+
                         <div class="row">
 
                             @foreach ($latesttwonews as $news)
@@ -123,13 +124,7 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <span aria-current="page" class="page-numbers current">1</span>
-                        <a class="page-numbers" href=" ">2</a>
-                        <a class="next page-numbers" href=" ">Next »</a>
-                    </div>
-                </div>
+
 
                 <br><br>
 
@@ -139,6 +134,19 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="sitebar-fixd" style="position: sticky; top: 0;">
+                    <div class="siteber-add">
+                        <div class="themesBazar_widget">
+                            <div class="textwidget">
+                                <p><img loading="lazy" class="aligncenter size-full wp-image-74"
+                                    @php
+                                        $banners=App\Models\Banner::where('id',1)->first();
+                                    @endphp
+                                        src="{{ asset($banners->news_details_one) }}" alt="Advertisement Here"
+                                        width="100%" height="auto">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="archivePopular">
                         <ul class="nav nav-pills" id="archivePopular-tab" role="tablist">
                             <li class="nav-item" role="presentation">

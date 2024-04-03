@@ -21,6 +21,7 @@ class BannerController extends Controller
 
         if ($request->file('home_one')) {
 
+            unlink(Banner::findOrFail($banner_id)->home_one);
             $image1 = $request->file('home_one');
             $name_gen1 = hexdec(uniqid()) . '.' . $image1->getClientOriginalExtension();
             $image1->move(public_path('uploads/banners/'), $name_gen1);
@@ -40,7 +41,7 @@ class BannerController extends Controller
 
 
         if ($request->file('home_two')) {
-
+            unlink(Banner::findOrFail($banner_id)->home_two);
             $image2 = $request->file('home_two');
             $name_gen2 = hexdec(uniqid()) . '.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('uploads/banners/'), $name_gen2);
@@ -59,7 +60,7 @@ class BannerController extends Controller
         }
 
         if ($request->file('home_three')) {
-
+            unlink(Banner::findOrFail($banner_id)->home_three);
             $image3 = $request->file('home_three');
             $name_gen3 = hexdec(uniqid()) . '.' . $image3->getClientOriginalExtension();
             $image3->move(public_path('uploads/banners/'), $name_gen3);
@@ -78,7 +79,7 @@ class BannerController extends Controller
         }
 
         if ($request->file('home_four')) {
-
+            unlink(Banner::findOrFail($banner_id)->home_four);
             $image4 = $request->file('home_four');
             $name_gen4 = hexdec(uniqid()) . '.' . $image4->getClientOriginalExtension();
             $image4->move(public_path('uploads/banners/'), $name_gen4);
@@ -98,7 +99,7 @@ class BannerController extends Controller
 
 
         if ($request->file('news_category_one')) {
-
+unlink(Banner::findOrFail($banner_id)->news_category_one);
             $image5 = $request->file('news_category_one');
             $name_gen5 = hexdec(uniqid()) . '.' . $image5->getClientOriginalExtension();
             $image5->move(public_path('uploads/banners/'), $name_gen5);

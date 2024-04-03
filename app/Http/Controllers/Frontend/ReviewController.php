@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use App\Models\User;
+use App\Notifications\ReviewNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ReviewController extends Controller
 {
     public function StoreReview(Request $request){
-
+        $user = User::where('role','admin')->get();
         $news = $request->news_id;
         $request->validate([
             'comment' => 'required',
@@ -25,6 +28,7 @@ class ReviewController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
+        Notification::send($user, new ReviewNotification($request));
         return back()->with("status","Review Will Approve By Admin");
     }
 
@@ -69,6 +73,16 @@ class ReviewController extends Controller
 
          $notification = array(
             'message' => 'Review Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function ChangeNotificationStatus($id){
+        Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
+         $notification = array(
+            'message' => 'Notification Marked as Read Successfully',
             'alert-type' => 'success'
         );
 

@@ -1,4 +1,5 @@
         @php
+        $banners=App\Models\Banner::find(1);
             $categories = App\Models\Category::orderBy('category_name', 'asc')->get();
             $current_date = new DateTime();
         @endphp
@@ -21,7 +22,7 @@
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     {{-- <select class="form-select changeLang">
                                         <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>
@@ -44,7 +45,7 @@
 
 
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-2 col-md-3">
                             <form class="header-search" action="{{route('search.news')}}" method="post">
                                 @csrf
                                 <input type="text" alue="" name="search" placeholder=" Search Here "
@@ -52,13 +53,10 @@
                                 <button type="submit"  value="Search"> <i class="las la-search"></i> </button>
                             </form>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="header-social">
-                                <ul>
-                                    <li> <a href="https://www.facebook.com/" target="_blank" title="facebook"><i
-                                                class="lab la-facebook-f"></i> </a> </li>
-                                    <li><a href="https://twitter.com/" target="_blank" title="twitter"><i
-                                                class="lab la-twitter"> </i> </a></li>
+                        <div class="col-lg-5 col-md-4">
+
+                                <div class="header-social">
+                                    <ul>
                                     @auth
                                         {{-- <li><a href="{{ route('dashboard') }}"><b>{{GoogleTranslate::trans('Profile',session()->get('locale')
                                             )
@@ -90,17 +88,19 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
                                 <div class="logo">
-                                    <a href="{{ route('home') }}" title="NewsFlash">
-                                        <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="NewsFlash"
-                                            title="NewsFlash">
+                                    <a href="{{ route('home') }}" title="Site Home">
+                                        <img src="{{ asset($siteinfo->logo) }}" alt="Site Logo"
+                                            title="{{$siteinfo->site_title}}">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-8">
+                                <center>
                                 <div class="banner">
-                                    <a href="{{ route('home') }}" target="_blank">
-                                    </a>
+                                    <img style="width: 250px" src="{{ asset($banners->home_one) }}" alt="Advertisement Here"
+                                            title="Advertisement">
                                 </div>
+                                </center>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="mobileLogo">
                             <a href="{{ route('home') }}" title="NewsFlash">
-                                <img src="{{ asset('frontend/assets/images/footer_logo.gif') }}" alt="Logo"
+                                <img src="{{ asset($siteinfo->logo) }}" alt="Logo"
                                     title="Logo">
                             </a>
                         </div>
@@ -164,13 +164,7 @@
                                         <a class="dd-toggle" href=" "><span class="icon-plus"></span></a>
                                     </li>
                                 @endforeach
-                                <li id="menu-item-277"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-277">
-                                    <a href=" ">{{
-                                    // GoogleTranslate::trans('International',session()->get('locale'))
-                                    'International'
-                                        }}</a>
-                                </li>
+                               
 
                             </ul>
                         </div>

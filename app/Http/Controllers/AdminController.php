@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\NewsPost;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,8 @@ class AdminController extends Controller
     //Admin Dashboard
     public function AdminDashboard()
     {
-        return view('admin.index');
+        $allnews = NewsPost::latest()->get();
+        return view('admin.index',compact('allnews'));
     }
 
 
@@ -60,8 +62,8 @@ class AdminController extends Controller
         if($request->hasFile('photo')){
             $image = $request->file('photo');
             $user->photo?unlink($user->photo):null;
-            $image_name = date('YmdHi').'.'.$image->getClientOriginalName();
-            $image->move(public_path('uploads/admin_images'),$image_name);
+            $image_name = date('YmdHi').'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploads/admin_images/'),$image_name);
             $user->photo = 'uploads/admin_images/'.$image_name;
         }
 
