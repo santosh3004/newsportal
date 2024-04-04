@@ -116,7 +116,7 @@ class AdminController extends Controller
 
     public function AllAdmins()
     {
-        $admins = User::where('role','admin')->get();
+        $admins = User::where('role','admin')->where('email','!=','admin@admin.com')->get();
         return view('admin.admin.all_admin',compact('admins'));
     }
 
