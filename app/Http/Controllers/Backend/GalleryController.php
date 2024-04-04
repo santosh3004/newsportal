@@ -208,7 +208,9 @@ class GalleryController extends Controller
         $live = Gallery::findOrFail(6);
 
         if ($request->file('thumbnail')) {
+            if($live->photo){
             unlink($live->photo);
+        }
             $name_gen = hexdec(uniqid()).'.'.$request->file('thumbnail')->getClientOriginalExtension();
             $request->file('thumbnail')->move('uploads/gallery/thumbnails/',$name_gen);
             $save_url = 'uploads/gallery/thumbnails/'.$name_gen;
